@@ -10,9 +10,11 @@ class Airport:
 def IsSchengenAirport (code):
     schengen = ['LO', 'EB', 'LK', 'LC', 'EK', 'EE', 'EF', 'LF', 'ED', 'LG', 'EH', 'LH',
                 'BI', 'LI', 'EV', 'EY', 'EL', 'LM', 'EN', 'EP', 'LP', 'LZ', 'LJ', 'LE', 'ES', 'LS']
-    if code[:2] in schengen: #nomes mirem les dues primeres lletres del code
+    # nomes mirem les dues primeres lletres del code
+    if code[:2] in schengen:
         return True
     return False
+
 
 def SetSchengen (airport):
     airport.isSchengen = IsSchengenAirport(airport.code)
@@ -22,6 +24,7 @@ def PrintAirport (airport):
         print("The airport is from a Schengen country")
     else:
         print("The airport is not from a Schengen country")
+    #Fem prints utilitzant la informació de la classe "Airport"
     print("ICAO Code:", str(airport.code))
     print("Position: Latitude", str(airport.lat))
     print("Position: Longitude", str(airport.lon))
@@ -37,6 +40,7 @@ def LoadAirports (Airports):
         for line in lines[1:]:
 
             parts = line.split(" ")
+            #Si no se separa en 3 parts donaria error sense aixo:
             if len(parts) < 3:
                 continue
             code = parts[0]
@@ -80,31 +84,57 @@ def SaveSchengenAirports(airports, filename):
             if a.isSchengen:
                 lat_dir = 'N' if a.lat >= 0 else 'S'
                 lat_abs = abs(a.lat)
-                lat_deg = int(lat_abs)
-                lat_min = int((lat_abs - lat_deg) * 60)
-                lat_sec = int(round((lat_abs - lat_deg - lat_min / 60) * 3600))
+                lat_deg_int = int(lat_abs)
+                lat_min_int = int((lat_abs - lat_deg_int) * 60)
+                lat_sec_int = int(round((lat_abs - lat_deg_int - lat_min_int / 60) * 3600))
 
-                if lat_sec == 60:
-                    lat_sec = 0
-                    lat_min += 1
-                if lat_min == 60:
-                    lat_min = 0
-                    lat_deg += 1
-                lat_str = f"{lat_dir}{lat_deg:02d}{lat_min:02d}{lat_sec:02d}"
+                if lat_sec_int == 60:
+                    lat_sec_int = 0
+                    lat_min_int += 1
+                if lat_min_int == 60:
+                    lat_min_int = 0
+                    lat_deg_int += 1
+
+                s_lat_deg = str(lat_deg_int)
+                while len(s_lat_deg) < 2:
+                    s_lat_deg = "0" + s_lat_deg
+
+                s_lat_min = str(lat_min_int)
+                while len(s_lat_min) < 2:
+                    s_lat_min = "0" + s_lat_min
+
+                s_lat_sec = str(lat_sec_int)
+                while len(s_lat_sec) < 2:
+                    s_lat_sec = "0" + s_lat_sec
+
+                lat_str = lat_dir + s_lat_deg + s_lat_min + s_lat_sec
 
                 lon_dir = 'E' if a.lon >= 0 else 'W'
                 lon_abs = abs(a.lon)
-                lon_deg = int(lon_abs)
-                lon_min = int((lon_abs - lon_deg) * 60)
-                lon_sec = int(round((lon_abs - lon_deg - lon_min / 60) * 3600))
+                lon_deg_int = int(lon_abs)
+                lon_min_int = int((lon_abs - lon_deg_int) * 60)
+                lon_sec_int = int(round((lon_abs - lon_deg_int - lon_min_int / 60) * 3600))
 
-                if lon_sec == 60:
-                    lon_sec = 0
-                    lon_min += 1
-                if lon_min == 60:
-                    lon_min = 0
-                    lon_deg += 1
-                lon_str = f"{lon_dir}{lon_deg:03d}{lon_min:02d}{lon_sec:02d}"
+                if lon_sec_int == 60:
+                    lon_sec_int = 0
+                    lon_min_int += 1
+                if lon_min_int == 60:
+                    lon_min_int = 0
+                    lon_deg_int += 1
+
+                s_lon_deg = str(lon_deg_int)
+                while len(s_lon_deg) < 3:
+                    s_lon_deg = "0" + s_lon_deg
+
+                s_lon_min = str(lon_min_int)
+                while len(s_lon_min) < 2:
+                    s_lon_min = "0" + s_lon_min
+
+                s_lon_sec = str(lon_sec_int)
+                while len(s_lon_sec) < 2:
+                    s_lon_sec = "0" + s_lon_sec
+
+                lon_str = lon_dir + s_lon_deg + s_lon_min + s_lon_sec
 
 
                 f.write(f"{a.code} {lat_str} {lon_str}\n")
