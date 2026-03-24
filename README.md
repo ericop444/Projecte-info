@@ -1,2 +1,2 @@
-Versió 1
+Versió 1:
 Èric Olego
