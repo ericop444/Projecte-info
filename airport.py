@@ -161,3 +161,32 @@ def RemoveAirport(airports, code):
             return 0
 
     return -1
+
+#Inici pas 5
+
+import matplotlib.pyplot as plt
+import os
+
+
+
+def PlotAirports (airports):
+    z=0
+    schengen_count = 0
+    non_schengen_count = 0
+    while z < len(airports):
+        if airports[z].isSchengen:
+            schengen_count += 1
+        else:
+            non_schengen_count += 1
+        z +=1
+
+    plt.bar(['Airports'], [schengen_count], label='Schengen', color='blue')
+    plt.bar(['Airports'], [non_schengen_count], bottom=[schengen_count], label='No Schengen', color='red')
+
+    plt.ylabel('Count')
+    plt.title('Schengen airports')
+    plt.legend()
+
+    plt.show()
+
+def MapAirports (airports):
