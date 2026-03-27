@@ -189,4 +189,80 @@ def PlotAirports (airports):
 
     plt.show()
 
-def MapAirports (airports):
+
+import os  # Necesario para abrir el archivo al final
+
+
+def MapAirports(airports):
+    #
+    f = open("mapa_aeropuertos.kml", "w")
+
+    #  cabecera obligatoria
+    f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    f.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
+    f.write('<Document>\n')
+
+
+    i = 0
+    while i < len(airports):
+        a = airports[i]
+
+        # Lógica de colores
+        if a.isSchengen == True:
+            color = "ff00ff00"  # Verde para Schengen
+        else:
+            color = "ff0000ff"  # Rojo para el resto
+
+        # chincheta
+        f.write('<Placemark>\n')
+        f.write('  <name>' + a.code + '</name>\n')
+        f.write('  <Style><IconStyle><color>' + color + '</color></IconStyle></Style>\n')
+        f.write('  <Point>\n')
+        # Pasamos las coordenadas
+        f.write('    <coordinates>' + str(a.lon) + ',' + str(a.lat) + ',0</coordinates>\n')
+        f.write('  </Point>\n')
+        f.write('</Placemark>\n')
+
+        i = i + 1
+
+    # Cerramos el archivo
+    f.write('</Document>\n')
+    f.write('</kml>\n')
+    f.close()
+
+    print("Archivo KML generado. Abriendo Google Earth...")
+
+    #  Abre el archivo con el programa por defecto
+
+    try:
+        os.startfile("mapa_aeropuertos.kml")
+    except:
+        print("No se pudo abrir solo. Haz doble clic en el archivo manualmente.")
+
+
+# --- BLOQUE DE EJECUCIÓN (MAIN) ---
+
+# 1. Cargamos los aeropuertos desde el archivo
+# (Asegúrate de que el archivo se llame exactamente así)
+lista_principal = LoadAirports("Airports.txt")
+
+if len(lista_principal) == 0:
+    print("Error: No se han podido cargar aeropuertos. Revisa el archivo Airports.txt")
+else:
+    # 2. ¡MUY IMPORTANTE! Calculamos el estado Schengen de cada uno
+    # Si no hacemos esto, MapAirports y PlotAirports no funcionarán bien.
+    for aero in lista_principal:
+        SetSchengen(aero)
+
+    # 3. Ejecutamos las funciones de visualización
+    print(f"Se han cargado {len(lista_principal)} aeropuertos.")
+
+    # Generamos la gráfica (BLO-5) [cite: 174, 281-283]
+    PlotAirports(lista_principal)
+
+    # Generamos el mapa KML para Google Earth
+    MapAirports(lista_principal)
+
+    # 4. Guardamos los que son Schengen en un archivo nuevo
+    SaveSchengenAirports(lista_principal, "Schengen_Airports.txt")
+    print("Proceso finalizado con éxito.")
