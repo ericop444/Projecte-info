@@ -2,12 +2,12 @@ import tkinter as tk
 from tkinter import filedialog, messagebox  # Para abrir archivos y mostrar mensajes
 from airport import *
 
-#Ventana principal
+#principal
 root = tk.Tk()
 root.title("Gestión de Aeropuertos")
 root.geometry("450x550")  # Un tamaño ajustado para la lista de botones
 
-#Lista aeropuertos
+#lista aeropuertos
 airports = []
 
 
