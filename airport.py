@@ -46,12 +46,12 @@ def LoadAirports (Airports):
             code = parts[0]
             lat_str = (parts[1])
             lon_str = (parts[2])
-
+        #Convertim latitud i longitud a nombre decimal
             lat_d = lat_str[0]
             lat_deg = float(lat_str[1:3])
             lat_min = float(lat_str[3:5])
             lat_sec = float(lat_str[5:7])
-
+            # Fórmula para convertir Grados, Minutos y Segundos a grados decimales
             lat_decimal = lat_deg + (lat_min / 60) + (lat_sec / 3600)
             if lat_d == 'S':
                 lat_decimal = -lat_decimal
@@ -62,6 +62,7 @@ def LoadAirports (Airports):
             lon_sec = float(lon_str[6:8])
 
             lon_decimal = lon_deg + (lon_min / 60) + (lon_sec / 3600)
+            #Creem llista afegint aeroports amb les seves coordenades decimals
             if lon_d == 'W':
                 lon_decimal = -lon_decimal
             nuevo_aeropuerto = Airport(code, lat_decimal, lon_decimal)
@@ -96,6 +97,7 @@ def SaveSchengenAirports(airports, filename):
                     lat_deg_int += 1
 
                 s_lat_deg = str(lat_deg_int)
+                # Rellenamos con ceros a la izquierda para mantener el formato
                 while len(s_lat_deg) < 2:
                     s_lat_deg = "0" + s_lat_deg
 
@@ -145,7 +147,7 @@ def SaveSchengenAirports(airports, filename):
         return -1
 
     return 0
-
+#Si el aeroport no esta a la llista, l'afegeix
 def AddAirport(airports, airport):
     for a in airports:
         if a.code == airport.code:
@@ -153,7 +155,7 @@ def AddAirport(airports, airport):
 
     airports.append(airport)
     return 0
-
+#Si l'aeroport esta repetit l'elimina
 def RemoveAirport(airports, code):
     for i in range(len(airports)):
         if airports[i].code == code:
@@ -168,7 +170,7 @@ import matplotlib.pyplot as plt
 import os
 
 
-
+#Grafic de schengen i nonschengen
 def PlotAirports (airports):
     z=0
     schengen_count = 0
@@ -189,4 +191,68 @@ def PlotAirports (airports):
 
     plt.show()
 
-def MapAirports (airports):
+
+#Importem arxiu KML perque google maps pugui obrir els aeroports
+def MapAirports(airports):
+    #
+    f = open("mapa_aeropuertos.kml", "w")
+
+    # encabezado mapa
+
+    f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    f.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
+    f.write('<Document>\n')
+
+
+    i = 0
+    while i < len(airports):
+        a = airports[i]
+
+        # Lógica de colores
+        if a.isSchengen == True:
+            color = "ff00ff00"  # Verde para Schengen
+        else:
+            color = "ff0000ff"  # Rojo para el resto
+
+        # per colocar marcadors dels aeroports
+        f.write('<Placemark>\n')
+        f.write('  <name>' + a.code + '</name>\n')
+        f.write('  <Style><IconStyle><color>' + color + '</color></IconStyle></Style>\n')
+        f.write('  <Point>\n')
+        # Pasamos las coordenadas
+        f.write('    <coordinates>' + str(a.lon) + ',' + str(a.lat) + ',0</coordinates>\n')
+        f.write('  </Point>\n')
+        f.write('</Placemark>\n')
+
+        i = i + 1
+
+        # Tanquem arxiu
+        f.write('</Document>\n')
+        f.write('</kml>\n')
+        f.close()
+
+        print("Archivo KML generado.")
+
+        # Abre el archivo con el programa por defecto
+        try:
+            os.startfile("mapa_aeropuertos.kml")
+        except Exception:
+            # En Mac/Linux os.startfile no existe, esto evita que el programa "pete"
+            print("Guarda el archivo y ábrelo manualmente.")
+
+    # --- BLOQUE DE EJECUCIÓN (MAIN) ---
+    # MUY IMPORTANTE: Este if evita que este código se ejecute cuando abrimos la interfaz gráfica.
+    if __name__ == "__main__":
+        lista_principal = LoadAirports("Airports.txt")
+
+        if len(lista_principal) == 0:
+            print("Error: No se han podido cargar aeropuertos. Revisa el archivo Airports.txt")
+        else:
+            for aero in lista_principal:
+                SetSchengen(aero)
+
+            print(f"Se han cargado {len(lista_principal)} aeropuertos.")
+            PlotAirports(lista_principal)
+            MapAirports(lista_principal)
+            SaveSchengenAirports(lista_principal, "Schengen_Airports.txt")
+            print("Proceso finalizado con éxito.")
