@@ -240,8 +240,8 @@ def MapAirports(airports):
             # En Mac/Linux os.startfile no existe, esto evita que el programa "pete"
             print("Guarda el archivo y ábrelo manualmente.")
 
-    # --- BLOQUE DE EJECUCIÓN (MAIN) ---
-    # MUY IMPORTANTE: Este if evita que este código se ejecute cuando abrimos la interfaz gráfica.
+    # (MAIN)
+    # Este if evita que este código se ejecute cuando abrimos la interfaz gráfica.
     if __name__ == "__main__":
         lista_principal = LoadAirports("Airports.txt")
 
