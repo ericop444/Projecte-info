@@ -6,6 +6,44 @@ class Aircraft:
         self.origin = origin
         self.time = time
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import matplotlib.pyplot as plt
 
 def PlotArrivals (aircrafts):
