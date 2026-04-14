@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+<Placemark>
+  <name>BIKF</name>
+  <Style><IconStyle><color>ff00ff00</color></IconStyle></Style>
+  <Point>
+    <coordinates>-22.605555555555558,63.985,0</coordinates>
+  </Point>
+</Placemark>
+</Document>
+</kml>
