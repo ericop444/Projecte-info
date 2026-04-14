@@ -10,22 +10,22 @@ class Aircraft:
 def LoadArrivals(filename):
     lista_aviones = []
 
-    # 1. Comprobamos si el archivo existe
+    # Comprobamos si el archivo existe
     if not os.path.exists(filename):
         return lista_aviones
 
-    # 2. Abrimos y leemos las líneas
+    # Abrimos y leemos las líneas
     f = open(filename, "r")
     lineas = f.readlines()
     f.close()
 
-    # 3. Procesamos las líneas con un 'while'
-    # Empezamos en z = 1 para saltarnos la cabecera (AIRCRAFT ORIGIN...)
+    # while
+    # Empezamos en z = 1 para saltarnos la cabecera
     z = 1
     while z < len(lineas):
         linea_actual = lineas[z]
 
-        # Troceamos la línea por espacios
+        #  línea por espacios
         partes = linea_actual.split()
 
         # VALIDACIÓN 1: El enunciado dice que debe tener 4 partes
@@ -35,10 +35,10 @@ def LoadArrivals(filename):
             hora = partes[2]
             compania = partes[3]
 
-            # VALIDACIÓN 2: Comprobar que la hora tenga el formato correcto (hh:mm)
+            # que la hora tenga el formato correcto (hh:mm)
             # Miramos si tiene los ":" y si mide 4 o 5 caracteres (ej: "0:04" o "12:30")
             if ":" in hora and (len(hora) == 4 or len(hora) == 5):
-                # Creamos el objeto con los datos
+                # Creamos eobjeto con los datos
                 # (Recuerda el orden de tu __init__: id, compania, origen, hora)
                 nuevo_avion = Aircraft(id_avion, compania, origen, hora)
 
