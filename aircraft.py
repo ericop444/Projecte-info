@@ -49,43 +49,6 @@ def LoadArrivals(filename):
         z = z + 1
 
     return lista_aviones
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 import matplotlib.pyplot as plt
