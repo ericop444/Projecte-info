@@ -80,3 +80,27 @@ def PlotArrivals (aircrafts):
 
     plt.show()
 
+def SaveFlights(aircrafts, filename):
+    if not aircrafts:
+        print("Error: Lista de vuelos vacia")
+        return
+    try:
+        f = open(filename, "w"):
+        f.write("AIRCRAFT ORIGIN ARRIVAL AIRLINE/n")
+
+        i=0
+        while i < len(aircrafts):
+            a = aircrafts[i]
+            #fem servir les classes per escriure linies
+            a_id = a.id if a.id else "''"
+            a_origin = a.origin if a.origin else "''"
+            a_time = a.time if a.time else "''"
+            a_airline = a.airline if a.airline else "''"
+            f.write(f"{a_id} {a_origin} {a_time} {a_airline}\n")
+            i +=1
+
+        return 0
+    #retornem error si n'hi ha
+    except exception as e:
+        print(f"Ha ocurrido un error al guardar el archivo: {e}")
+        return -1
