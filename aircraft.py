@@ -43,7 +43,6 @@ class Aircraft:
 
 
 
-
 import matplotlib.pyplot as plt
 
 def PlotArrivals (aircrafts):
