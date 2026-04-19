@@ -80,3 +80,43 @@ def PlotArrivals (aircrafts):
 
     plt.show()
 
+def PlotAirlines(aircrafts):
+     #lista está vacía?
+    if len(aircrafts) == 0:
+        print("Error: El vector de aviones está vacío. No se puede generar el gráfico.")
+        return
+
+
+    nombres_companias = []
+    conteo_vuelos = []
+
+
+    z = 0
+    while z < len(aircrafts):
+        avion = aircrafts[z]
+        cia = avion.airline
+
+
+        encontrada = False
+        k = 0
+        while k < len(nombres_companias):
+            if nombres_companias[k] == cia:
+
+                conteo_vuelos[k] = conteo_vuelos[k] + 1
+                encontrada = True
+            k = k + 1
+
+
+        if encontrada == False:
+
+            nombres_companias.append(cia)
+            conteo_vuelos.append(1)
+
+        z = z + 1
+
+
+    plt.bar(nombres_companias, conteo_vuelos, color='skyblue')
+    plt.xlabel('Compañía Aérea')
+    plt.ylabel('Número de Vuelos')
+    plt.title('Vuelos por Compañía (Llegadas a LEBL)')
+    plt.show()
