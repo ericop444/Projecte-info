@@ -114,6 +114,8 @@ def PlotArrivals (aircrafts):
 
 
 
+
+#Funcio 3
 def SaveFlights(aircrafts, filename):
     if not aircrafts:
         print("Error: Lista de vuelos vacia")
