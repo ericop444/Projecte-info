@@ -235,7 +235,7 @@ def PlotAirlines(aircrafts):
                     origin_lat = airports_list[j].coordinates[0]
                     origin_lon = airports_list[j].coordinates[1]
                     found = True
-                j += 1
+                j = j+1
 
             # Dibujamos la ruta si encontramos el aeropuerto de origen
             if found:
@@ -259,7 +259,7 @@ def PlotAirlines(aircrafts):
                 f.write('    </LineString>\n')
                 f.write('  </Placemark>\n')
 
-            i += 1
+            i = i+1
 
         f.write('</Document>\n')
         f.write('</kml>\n')
