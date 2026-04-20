@@ -80,6 +80,40 @@ def PlotArrivals (aircrafts):
 
     plt.show()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def SaveFlights(aircrafts, filename):
     if not aircrafts:
         print("Error: Lista de vuelos vacia")
