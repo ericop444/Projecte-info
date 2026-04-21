@@ -17,9 +17,8 @@ def LoadArrivals(filename):
         return lista_aviones
 
     # Abrimos y leemos las líneas
-    f = open(filename, "r")
-    lineas = f.readlines()
-    f.close()
+    with open(filename, "r") as f:
+        lineas = f.readlines()
 
     # while
     # Empezamos en z = 1 para saltarnos la cabecera
@@ -70,7 +69,7 @@ def PlotArrivals (aircrafts):
             hora = int(a.time.split(':')[0])
             hora_at.append(hora)
         except (ValueError, AttributeError):
-            print("Linea",[i]+1," con errores de formato")
+            print("Linea",i+1," con errores de formato")
         i +=1
     #creem grafic 24 barres
     plt.hist(hora_at, bins=range(25), edgecolor='black', align='left')
@@ -145,7 +144,6 @@ def PlotAirlines(aircrafts):
     plt.show()
 
 # Función 5
-import matplotlib.pyplot as plt
 from airport import IsSchengenAirport  # Necesitamos importar esta función también
 
 def PlotFlightsType(aircrafts):
@@ -193,7 +191,9 @@ def MapFlights(aircrafts):
         return
 
     airports_list = LoadAirports("Airports.txt")
-
+    if not airports_list:
+        print("Error: No se han podido cargar los aeropuertos")
+        return
     # Coordenadas de Barcelona LEBL
     lebl_lat = 41.297445
     lebl_lon = 2.0832941
