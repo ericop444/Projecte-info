@@ -232,8 +232,8 @@ def MapFlights(aircrafts):
         while j < len(airports_list) and not found:
 
             if airports_list[j].code == ac.origin:
-                origin_lat = airports_list[j].lat
-                origin_lon = airports_list[j].lon
+                origin_lat = airports_list[j].coordinates[0]
+                origin_lon = airports_list[j].coordinates[1]
                 found = True
             j = j+1
 
@@ -269,11 +269,83 @@ def MapFlights(aircrafts):
 import os
 import math
 
-# Funció 7
+
+# ===== CLASSE AIRPORT =====
+class Airport:
+    def __init__(self, code, lat, lon):
+        self.code = code
+        self.lat = lat
+        self.lon = lon
+
+
+# ===== LOAD AIRPORTS (EL TEU, ARREGLAT) =====
+def LoadAirports(Airports):
+    airport_list = []
+
+    if not os.path.exists(Airports):
+        return airport_list
+
+    with open(Airports, "r") as f:
+        lines = f.readlines()
+
+        for line in lines[1:]:
+
+            parts = line.split()   # millor que split(" ")
+            if len(parts) < 3:
+                continue
+
+            code = parts[0]
+            lat_str = parts[1]
+            lon_str = parts[2]
+
+            # LAT
+            lat_d = lat_str[0]
+            lat_deg = float(lat_str[1:3])
+            lat_min = float(lat_str[3:5])
+            lat_sec = float(lat_str[5:7])
+
+            lat_decimal = lat_deg + (lat_min / 60) + (lat_sec / 3600)
+            if lat_d == 'S':
+                lat_decimal = -lat_decimal
+
+            # LON
+            lon_d = lon_str[0]
+            lon_deg = float(lon_str[1:4])
+            lon_min = float(lon_str[4:6])
+            lon_sec = float(lon_str[6:8])
+
+            lon_decimal = lon_deg + (lon_min / 60) + (lon_sec / 3600)
+            if lon_d == 'W':
+                lon_decimal = -lon_decimal
+
+            nuevo_aeropuerto = Airport(code, lat_decimal, lon_decimal)
+            airport_list.append(nuevo_aeropuerto)
+
+    return airport_list
+
+
+# ===== HAVERSINE =====
+def haversine(lat1, lon1, lat2, lon2):
+    R = 6371
+
+    lat1 = math.radians(lat1)
+    lon1 = math.radians(lon1)
+    lat2 = math.radians(lat2)
+    lon2 = math.radians(lon2)
+
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+
+    a = math.sin(dlat/2)**2 + math.cos(lat1)*math.cos(lat2)*math.sin(dlon/2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+
+    return R * c
+
 def LongDistanceArrivals(aircrafts):
 
     result = []
-    airports = LoadAirports("Airports.txt")  # mismo nombre siempre
+
+    airports = LoadAirports("airports.txt")  # carregues aeroports
 
     # Barcelona
     bcn_lat = 41.2974
@@ -283,25 +355,11 @@ def LongDistanceArrivals(aircrafts):
 
         origin_code = aircraft.origin
 
-        for ap in airports:
-            if ap.code == origin_code:
+        # buscar aeroport
+        for airport in airports:
+            if airport.code == origin_code:
 
-                # --- HAVERSINE INLINE ---
-                R = 6371
-
-                lat1 = math.radians(bcn_lat)
-                lon1 = math.radians(bcn_lon)
-                lat2 = math.radians(ap.lat)
-                lon2 = math.radians(ap.lon)
-
-                dlat = abs(lat1 - lat2)
-                dlon = abs(lon1 - lon2)
-
-                a = math.sin(dlat/2)**2 + math.cos(lat1)*math.cos(lat2)*math.sin(dlon/2)**2
-                c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-
-                dist = R * c
-                # ------------------------
+                dist = haversine(bcn_lat, bcn_lon, airport.lat, airport.lon)
 
                 if dist > 2000:
                     result.append(aircraft)
@@ -311,7 +369,7 @@ def LongDistanceArrivals(aircrafts):
     return result
 
 
-# TEST
+# ===== TEST =====
 if __name__ == "__main__":
     aircrafts = LoadArrivals("arrivals.txt")
 
@@ -319,7 +377,3 @@ if __name__ == "__main__":
     long_flights = LongDistanceArrivals(aircrafts)
 
     print("Vols de més de 2000 km:", len(long_flights))
-    PlotArrivals(aircrafts)
-    PlotAirlines(aircrafts)
-    PlotFlightsType(aircrafts)
-    MapFlights(aircrafts)
