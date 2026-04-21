@@ -1,18 +1,20 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox  # Para abrir archivos y mostrar mensajes
+from tkinter import filedialog, messagebox  #Para abrir archivos y mostrar mensajes
 from airport import *
+import matplotlib.pyplot as plt
+
 
 #principal
 root = tk.Tk()
 root.title("Gestión de Aeropuertos")
-root.geometry("450x550")  # Un tamaño ajustado para la lista de botones
+root.geometry("450x850")  #Tamaño ajustado para la lista de botones
 
-#lista aeropuertos
+#lista de aeropuertos
 airports = []
-
+aircrafts = []
 
 #funciones
-    # Lee los datos de las cajas de texto, crea un objeto Airport y lo añade a la lista si no existe
+    #Lee los datos de las cajas de texto, crea un objeto Airport y lo añade a la lista si no existe
 def add_airport():
     icaocode = entry_icao.get().upper()
     try:
@@ -52,7 +54,7 @@ def remove_airport():
 
     if result == 0:
         messagebox.showinfo("Éxito", f"Aeropuerto {icaocode} eliminado correctamente")
-        entry_icao.delete(0, tk.END)  # Limpiar la caja de texto al borrar
+        entry_icao.delete(0, tk.END)  #Limpiar la caja de texto al borrar
     else:
         messagebox.showerror("Error", f"No se encontró el aeropuerto {icaocode}")
 
@@ -133,9 +135,62 @@ def map_airports():
     except Exception as e:
         messagebox.showerror("Error", f"No se pudo abrir Google Earth:\n{e}")
 
+def load_arrivals_file():
+    filename = filedialog.askopenfilename(title="Selecciona archivo de llegadas (Arrivals.txt)")
+    if not filename: return
+    try:
+        global aircrafts
+        aircrafts = LoadArrivals(filename)
+        messagebox.showinfo("Éxito", f"Cargados {len(aircrafts)} vuelos de llegada")
+    except Exception as e:
+        messagebox.showerror("Error", f"Error al cargar llegadas:\n{e}")
+
+def save_aircrafts_file():
+    if not aircrafts:
+        messagebox.showerror("Error", "No hay vuelos cargados")
+        return
+    filename = filedialog.asksaveasfilename(title="Guardar información de vuelos", defaultextension=".txt")
+    if not filename: return
+    SaveFlights(aircrafts, filename)
+    messagebox.showinfo("Éxito", "Vuelos guardados correctamente")
+
+def plot_arrivals_hour():
+    if not aircrafts:
+        messagebox.showerror("Error", "No hay vuelos")
+        return
+    PlotArrivals(aircrafts)
+
+def plot_arrivals_airline():
+    if not aircrafts:
+        messagebox.showerror("Error", "No hay vuelos")
+        return
+    PlotAirlines(aircrafts)
+
+def plot_arrivals_type():
+    if not aircrafts:
+        messagebox.showerror("Error", "No hay vuelos")
+        return
+    PlotFlightsType(aircrafts)
+
+def map_all_trajectories():
+    if not aircrafts:
+        messagebox.showerror("Error", "No hay vuelos")
+        return
+    MapFlights(aircrafts)
+
+def map_long_trajectories():
+    if not aircrafts:
+        messagebox.showerror("Error", "No hay vuelos")
+        return
+    # Filtramos primero los de larga distancia (>2000km) y luego los mapeamos
+    long_dist_flights = LongDistanceArrivals(aircrafts)
+    if not long_dist_flights:
+        messagebox.showinfo("Aviso", "No hay vuelos de más de 2000km")
+        return
+    MapFlights(long_dist_flights)
+
 
 #interfaz
-
 #entradas
 tk.Label(root, text="Código ICAO:").pack(pady=(10, 0))
 entry_icao = tk.Entry(root)
@@ -149,7 +204,7 @@ tk.Label(root, text="Longitud:").pack()
 entry_lon = tk.Entry(root)
 entry_lon.pack()
 
-#botones
+#Botones de la version 1
 tk.Button(root, text="Agregar aeropuerto", width=35, command=add_airport).pack(pady=(15, 5))
 tk.Button(root, text="Eliminar aeropuerto", width=35, command=remove_airport).pack(pady=5)
 tk.Button(root, text="Cargar aeropuertos desde archivo", width=35, command=load_airports_file).pack(pady=5)
@@ -157,5 +212,14 @@ tk.Button(root, text="Guardar aeropuertos Schengen", width=35, command=save_sche
 tk.Button(root, text="Mostrar aeropuertos", width=35, command=show_airports).pack(pady=5)
 tk.Button(root, text="Graficar aeropuertos", width=35, command=plot_airports).pack(pady=5)
 tk.Button(root, text="Mostrar aeropuertos en Google Earth", width=35, command=map_airports).pack(pady=5)
+
+#Botones de la versión 2
+tk.Button(root, text="Cargar llegadas", width=35, command=load_arrivals_file).pack(pady=5)
+tk.Button(root, text="Guardar vuelos", width=35, command=save_flights_file).pack(pady=5)
+tk.Button(root, text="Graficar llegadas por hora", width=35, command=plot_arrivals).pack(pady=5)
+tk.Button(root, text="Graficar vuelos por compañía", width=35, command=plot_airlines).pack(pady=5)
+tk.Button(root, text="Graficar Schengen vs No-Schengen", width=35, command=plot_flights_type).pack(pady=5)
+tk.Button(root, text="Mostrar trayectorias en Google Earth", width=35, command=map_flights).pack(pady=5)
+tk.Button(root, text="Mostrar solo larga distancia en Google Earth", width=35, command=map_long_distance).pack(pady=5)
 
 root.mainloop()
