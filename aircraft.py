@@ -89,8 +89,8 @@ def SaveFlights(aircrafts, filename):
         print("Error: Lista de vuelos vacia")
         return
     try:
-        f = open(filename, "w")
-        f.write("AIRCRAFT ORIGIN ARRIVAL AIRLINE\n")
+        with open(filename, "w") as f:
+            f.write("AIRCRAFT ORIGIN ARRIVAL AIRLINE\n")
 
         i=0
         while i < len(aircrafts):
@@ -108,7 +108,7 @@ def SaveFlights(aircrafts, filename):
     except Exception as e:
         print(f"Ha ocurrido un error al guardar el archivo: {e}")
         return -1
-    f.close()
+
 # funcion 4:
 def PlotAirlines(aircrafts):
     # lista está vacía?
@@ -162,10 +162,10 @@ def PlotFlightsType(aircrafts):
     i = 0
     while i < len(aircrafts):
         if IsSchengenAirport(aircrafts[i].origin):
-            schengen_count = schengen_count + 1
+            schengen_count += 1
         else:
-            non_schengen_count = non_schengen_count + 1
-            i = i + 1
+            non_schengen_count += 1
+        i += 1
 
         # Creamos el gráfico con forma "stacked bars"
         labels = ['Arrivals']  # Solo necesitamos esta columna, ya que las dos salidas van encima.
@@ -183,87 +183,86 @@ def PlotFlightsType(aircrafts):
 
         plt.show()
 
-    # Función 6
-    from airport import LoadAirports
+# Función 6
+from airport import LoadAirports
 
-    def MapFlights(aircrafts):
-        # Muestra en Google Earth la trayectoria de todos los vuelos de la lista, desde su origen hasta LEBL.
-        if len(aircrafts) == 0:
-            print("Error: The list of aircrafts is empty. Map cannot be generated.")
-            return
+def MapFlights(aircrafts):
+    # Muestra en Google Earth la trayectoria de todos los vuelos de la lista, desde su origen hasta LEBL.
+    if len(aircrafts) == 0:
+        print("Error: The list of aircrafts is empty. Map cannot be generated.")
+        return
 
-        airports_list = LoadAirports("Airports.txt")
+    airports_list = LoadAirports("Airports.txt")
 
-        # Coordenadas de Barcelona LEBL
-        lebl_lat = 41.297445
-        lebl_lon = 2.0832941
+    # Coordenadas de Barcelona LEBL
+    lebl_lat = 41.297445
+    lebl_lon = 2.0832941
 
-        f = open("flights_map.kml", "w")
+    f = open("flights_map.kml", "w")
 
-        f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-        f.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
-        f.write('<Document>\n')
+    f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    f.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
+    f.write('<Document>\n')
 
-        # Estilos KML (Azul para Schengen, Rojo para no Schengen)
-        f.write('  <Style id="schengenStyle">\n')
-        f.write('    <LineStyle>\n')
-        f.write('      <color>ffff0000</color>\n')
-        f.write('      <width>2</width>\n')
-        f.write('    </LineStyle>\n')
-        f.write('  </Style>\n')
+    # Estilos KML (Azul para Schengen, Rojo para no Schengen)
+    f.write('  <Style id="schengenStyle">\n')
+    f.write('    <LineStyle>\n')
+    f.write('      <color>ffff0000</color>\n')
+    f.write('      <width>2</width>\n')
+    f.write('    </LineStyle>\n')
+    f.write('  </Style>\n')
+    f.write('  <Style id="nonSchengenStyle">\n')
+    f.write('    <LineStyle>\n')
+    f.write('      <color>ff0000ff</color>\n')
+    f.write('      <width>2</width>\n')
+    f.write('    </LineStyle>\n')
+    f.write('  </Style>\n')
 
-        f.write('  <Style id="nonSchengenStyle">\n')
-        f.write('    <LineStyle>\n')
-        f.write('      <color>ff0000ff</color>\n')
-        f.write('      <width>2</width>\n')
-        f.write('    </LineStyle>\n')
-        f.write('  </Style>\n')
+    i = 0
 
-        i = 0
+    while i < len(aircrafts):
+        ac = aircrafts[i]
 
-        while i < len(aircrafts):
-            ac = aircrafts[i]
+        origin_lat = 0.0
+        origin_lon = 0.0
+        found = False
 
-            origin_lat = 0.0
-            origin_lon = 0.0
-            found = False
+        # Buscamos las coordenadas del aeropuerto con la lista cargada
+        j = 0
+        while j < len(airports_list) and not found:
 
-            # Buscamos las coordenadas del aeropuerto con la lista cargada
-            j = 0
-            while j < len(airports_list) and not found:
+            if airports_list[j].code == ac.origin:
+                origin_lat = airports_list[j].coordinates[0]
+                origin_lon = airports_list[j].coordinates[1]
+                found = True
+            j = j+1
 
-                if airports_list[j].code == ac.origin:
-                    origin_lat = airports_list[j].coordinates[0]
-                    origin_lon = airports_list[j].coordinates[1]
-                    found = True
-                j = j+1
+        # Dibujamos la ruta si encontramos el aeropuerto de origen
+        if found:
+            if IsSchengenAirport(ac.origin):
+                style = "#schengenStyle"
+            else:
+                style = "#nonSchengenStyle"
 
-            # Dibujamos la ruta si encontramos el aeropuerto de origen
-            if found:
-                if IsSchengenAirport(ac.origin):
-                    style = "#schengenStyle"
-                else:
-                    style = "#nonSchengenStyle"
+            f.write('  <Placemark>\n')
+            f.write('    <name>Route ' + ac.origin + ' - LEBL (' + ac.airline + ')</name>\n')
+            f.write('    <styleUrl>' + style + '</styleUrl>\n')
+            f.write('    <LineString>\n')
+            f.write('      <altitudeMode>clampToGround</altitudeMode>\n')
+            f.write('      <extrude>1</extrude>\n')
+            f.write('      <tessellate>1</tessellate>\n')
+            f.write('      <coordinates>\n')
 
-                f.write('  <Placemark>\n')
-                f.write('    <name>Route ' + ac.origin + ' - LEBL (' + ac.airline + ')</name>\n')
-                f.write('    <styleUrl>' + style + '</styleUrl>\n')
-                f.write('    <LineString>\n')
-                f.write('      <altitudeMode>clampToGround</altitudeMode>\n')
-                f.write('      <extrude>1</extrude>\n')
-                f.write('      <tessellate>1</tessellate>\n')
-                f.write('      <coordinates>\n')
+            f.write('        ' + str(origin_lon) + ',' + str(origin_lat) + '\n')
+            f.write('        ' + str(lebl_lon) + ',' + str(lebl_lat) + '\n')
+            f.write('      </coordinates>\n')
+            f.write('    </LineString>\n')
+            f.write('  </Placemark>\n')
 
-                f.write('        ' + str(origin_lon) + ',' + str(origin_lat) + '\n')
-                f.write('        ' + str(lebl_lon) + ',' + str(lebl_lat) + '\n')
-                f.write('      </coordinates>\n')
-                f.write('    </LineString>\n')
-                f.write('  </Placemark>\n')
+        i = i+1
 
-            i = i+1
+    f.write('</Document>\n')
+    f.write('</kml>\n')
+    f.close()
 
-        f.write('</Document>\n')
-        f.write('</kml>\n')
-        f.close()
-
-        print("El mapa se ha guardado correctamente como 'flights_map.kml'")
+    print("El mapa se ha guardado correctamente como 'flights_map.kml'")
