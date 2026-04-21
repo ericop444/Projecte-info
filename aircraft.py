@@ -6,6 +6,8 @@ class Aircraft:
         self.origin = origin
         self.time = time
 
+import os
+
 #Funcio 1
 def LoadArrivals(filename):
     lista_aviones = []
@@ -87,14 +89,14 @@ def SaveFlights(aircrafts, filename):
         print("Error: Lista de vuelos vacia")
         return
     try:
-        f = open(filename, "w"):
-        f.write("AIRCRAFT ORIGIN ARRIVAL AIRLINE/n")
+        f = open(filename, "w")
+        f.write("AIRCRAFT ORIGIN ARRIVAL AIRLINE\n")
 
         i=0
         while i < len(aircrafts):
             a = aircrafts[i]
             #fem servir les classes per escriure linies
-            a_id = a.id if a.id else "''"
+            a_id = a.id if a.id else "-"
             a_origin = a.origin if a.origin else "''"
             a_time = a.time if a.time else "''"
             a_airline = a.airline if a.airline else "''"
@@ -103,10 +105,10 @@ def SaveFlights(aircrafts, filename):
 
         return 0
     #retornem error si n'hi ha
-    except exception as e:
+    except Exception as e:
         print(f"Ha ocurrido un error al guardar el archivo: {e}")
         return -1
-
+    f.close()
 # funcion 4:
 def PlotAirlines(aircrafts):
     # lista está vacía?
@@ -142,28 +144,27 @@ def PlotAirlines(aircrafts):
     plt.title('Vuelos por Compañía (Llegadas a LEBL)')
     plt.show()
 
-    # Función 5
-    import matplotlib.pyplot as plt
-    from airport import IsSchengenAirport  # Necesitamos importar esta función también
+# Función 5
+import matplotlib.pyplot as plt
+from airport import IsSchengenAirport  # Necesitamos importar esta función también
 
-    def PlotFlightsType(aircrafts):
-        # Recibe una lista de vuelos y muestra en una gráfica los schengen y los no schengen
-        # Si la lista está vacia se muestra un error en la pantalla:
+def PlotFlightsType(aircrafts):
+    # Recibe una lista de vuelos y muestra en una gráfica los schengen y los no schengen
+    # Si la lista está vacia se muestra un error en la pantalla:
 
-        if len(aircrafts) == 0:
-            print("Error: Aircraft list is empty, therefore cannot generate plot")
-            return  # Salimos de la function para que no muestre nada más
+    if len(aircrafts) == 0:
+        print("Error: Aircraft list is empty, therefore cannot generate plot")
+        return  # Salimos de la function para que no muestre nada más
 
-        schengen_count = 0
-        non_schengen_count = 0
+    schengen_count = 0
+    non_schengen_count = 0
 
-        i = 0
-
-        while i < len(aircrafts):
-            if IsSchengenAirport(aircrafts[i].origin):
-                schengen_count = schengen_count + 1
-            else:
-                non_schengen_count = non_schengen_count + 1
+    i = 0
+    while i < len(aircrafts):
+        if IsSchengenAirport(aircrafts[i].origin):
+            schengen_count = schengen_count + 1
+        else:
+            non_schengen_count = non_schengen_count + 1
             i = i + 1
 
         # Creamos el gráfico con forma "stacked bars"
