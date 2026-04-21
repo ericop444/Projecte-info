@@ -277,8 +277,6 @@ class Airport:
         self.lat = lat
         self.lon = lon
 
-
-# ===== LOAD AIRPORTS (EL TEU, ARREGLAT) =====
 def LoadAirports(Airports):
     airport_list = []
 
@@ -290,7 +288,7 @@ def LoadAirports(Airports):
 
         for line in lines[1:]:
 
-            parts = line.split()   # millor que split(" ")
+            parts = line.split()
             if len(parts) < 3:
                 continue
 
