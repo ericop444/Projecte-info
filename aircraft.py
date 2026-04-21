@@ -151,7 +151,7 @@ def PlotAirlines(aircrafts):
         # Si la lista está vacia se muestra un error en la pantalla:
 
         if len(aircrafts) == 0:
-            print("Error: Aircraft list is empty, therefore cannot generate plot")
+            print("Error: La lista de aeronaves está vacía, por lo tanto no se puede generar el gráfico.")
             return  # Salimos de la function para que no muestre nada más
 
         schengen_count = 0
