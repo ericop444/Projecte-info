@@ -6,8 +6,9 @@ class Aircraft:
         self.origin = origin
         self.time = time
 
-#Funcio 1
 import os
+
+#Funcio 1
 def LoadArrivals(filename):
     lista_aviones = []
 
@@ -16,9 +17,8 @@ def LoadArrivals(filename):
         return lista_aviones
 
     # Abrimos y leemos las líneas
-    f = open(filename, "r")
-    lineas = f.readlines()
-    f.close()
+    with open(filename, "r") as f:
+        lineas = f.readlines()
 
     # while
     # Empezamos en z = 1 para saltarnos la cabecera
@@ -88,19 +88,19 @@ def SaveFlights(aircrafts, filename):
         print("Error: Lista de vuelos vacia")
         return
     try:
-        f = open(filename, "w")
-        f.write("AIRCRAFT ORIGIN ARRIVAL AIRLINE\n")
+        with open(filename, "w") as f:
+            f.write("AIRCRAFT ORIGIN ARRIVAL AIRLINE\n")
 
-        i=0
-        while i < len(aircrafts):
-            a = aircrafts[i]
-            #fem servir les classes per escriure linies
-            a_id = a.id if a.id else "''"
-            a_origin = a.origin if a.origin else "''"
-            a_time = a.time if a.time else "''"
-            a_airline = a.airline if a.airline else "''"
-            f.write(f"{a_id} {a_origin} {a_time} {a_airline}\n")
-            i +=1
+            i = 0
+            while i < len(aircrafts):
+                a = aircrafts[i]
+                a_id = a.id if a.id else "-"
+                a_origin = a.origin if a.origin else "-"
+                a_time = a.time if a.time else "-"
+                a_airline = a.airline if a.airline else "-"
+
+                f.write(f"{a_id} {a_origin} {a_time} {a_airline}\n")
+                i += 1
 
         return 0
     #retornem error si n'hi ha
@@ -144,12 +144,11 @@ def PlotAirlines(aircrafts):
     plt.show()
 
 # Función 5
-import matplotlib.pyplot as plt
 from airport import IsSchengenAirport  # Necesitamos importar esta función también
 
 def PlotFlightsType(aircrafts):
-        # Recibe una lista de vuelos y muestra en una gráfica los schengen y los no schengen
-        # Si la lista está vacia se muestra un error en la pantalla:
+    # Recibe una lista de vuelos y muestra en una gráfica los schengen y los no schengen
+    # Si la lista está vacia se muestra un error en la pantalla:
 
     if len(aircrafts) == 0:
         print("Error: Aircraft list is empty, therefore cannot generate plot")
@@ -159,22 +158,21 @@ def PlotFlightsType(aircrafts):
     non_schengen_count = 0
 
     i = 0
-
     while i < len(aircrafts):
         if IsSchengenAirport(aircrafts[i].origin):
-            schengen_count = schengen_count + 1
+            schengen_count += 1
         else:
-            non_schengen_count = non_schengen_count + 1
-        i = i + 1
+            non_schengen_count += 1
+        i += 1
 
-        # Creamos el gráfico con forma "stacked bars"
+    # Creamos el gráfico con forma "stacked bars"
     labels = ['Arrivals']  # Solo necesitamos esta columna, ya que las dos salidas van encima.
 
     fig, ax = plt.subplots()
 
     ax.bar(labels, [schengen_count], label='Schengen', color='blue')
 
-        # Para que se apilen las gráficas el parámetro 'bottom' empieza donde acaba la otra:
+    # Para que se apilen las gráficas el parámetro 'bottom' empieza donde acaba la otra:
     ax.bar(labels, [non_schengen_count], bottom=[schengen_count], label='No Schengen', color='lightcoral')
 
     ax.set_ylabel('Number of flights')
@@ -187,14 +185,16 @@ def PlotFlightsType(aircrafts):
 from airport import LoadAirports
 
 def MapFlights(aircrafts):
-        # Muestra en Google Earth la trayectoria de todos los vuelos de la lista, desde su origen hasta LEBL.
+    # Muestra en Google Earth la trayectoria de todos los vuelos de la lista, desde su origen hasta LEBL.
     if len(aircrafts) == 0:
         print("Error: The list of aircrafts is empty. Map cannot be generated.")
         return
 
     airports_list = LoadAirports("Airports.txt")
-
-        # Coordenadas de Barcelona LEBL
+    if not airports_list:
+        print("Error: No se han podido cargar los aeropuertos")
+        return
+    # Coordenadas de Barcelona LEBL
     lebl_lat = 41.297445
     lebl_lon = 2.0832941
 
@@ -204,14 +204,13 @@ def MapFlights(aircrafts):
     f.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
     f.write('<Document>\n')
 
-        # Estilos KML (Azul para Schengen, Rojo para no Schengen)
+    # Estilos KML (Azul para Schengen, Rojo para no Schengen)
     f.write('  <Style id="schengenStyle">\n')
     f.write('    <LineStyle>\n')
     f.write('      <color>ffff0000</color>\n')
     f.write('      <width>2</width>\n')
     f.write('    </LineStyle>\n')
     f.write('  </Style>\n')
-
     f.write('  <Style id="nonSchengenStyle">\n')
     f.write('    <LineStyle>\n')
     f.write('      <color>ff0000ff</color>\n')
@@ -228,7 +227,7 @@ def MapFlights(aircrafts):
         origin_lon = 0.0
         found = False
 
-            # Buscamos las coordenadas del aeropuerto con la lista cargada
+        # Buscamos las coordenadas del aeropuerto con la lista cargada
         j = 0
         while j < len(airports_list) and not found:
 
@@ -238,7 +237,7 @@ def MapFlights(aircrafts):
                 found = True
             j = j+1
 
-            # Dibujamos la ruta si encontramos el aeropuerto de origen
+        # Dibujamos la ruta si encontramos el aeropuerto de origen
         if found:
             if IsSchengenAirport(ac.origin):
                 style = "#schengenStyle"
@@ -267,8 +266,43 @@ def MapFlights(aircrafts):
     f.close()
 
     print("El mapa se ha guardado correctamente como 'flights_map.kml'")
+import os
+import math
 
-# test section
+# Funció 7
+def LongDistanceArrivals(aircrafts):
+
+    result = []
+
+    airports = LoadAirports("airports.txt")  # carregues aeroports
+
+    # Barcelona
+    bcn_lat = 41.2974
+    bcn_lon = 2.0833
+
+    for aircraft in aircrafts:
+
+        origin_code = aircraft.origin
+
+        # buscar aeroport
+        for ap in airports:
+            if ap.code == origin_code:
+
+                dist = haversine(bcn_lat, bcn_lon, ap.lat, ap.lon)
+
+                if dist > 2000:
+                    result.append(aircraft)
+
+                break
+
+    return result
+
+
+# TEST
 if __name__ == "__main__":
-    aircrafts = LoadArrivals("Arrivals.txt")
-    PlotArrivals(aircrafts)
+    aircrafts = LoadArrivals("arrivals.txt")
+
+    # prova la funció nova
+    long_flights = LongDistanceArrivals(aircrafts)
+
+    print("Vols de més de 2000 km:", len(long_flights))
