@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <Style id="schengenStyle">
+    <LineStyle>
+      <color>ffff0000</color>
+      <width>2</width>
+    </LineStyle>
+  </Style>
+  <Style id="nonSchengenStyle">
+    <LineStyle>
+      <color>ff0000ff</color>
+      <width>2</width>
+    </LineStyle>
+  </Style>
+  <Placemark>
+    <name>Route BIKF - LEBL (VLG)</name>
+    <styleUrl>#schengenStyle</styleUrl>
+    <LineString>
+      <altitudeMode>clampToGround</altitudeMode>
+      <extrude>1</extrude>
+      <tessellate>1</tessellate>
+      <coordinates>
+        -22.605555555555558,63.985
+        2.0832941,41.297445
+      </coordinates>
+    </LineString>
+  </Placemark>
+  <Placemark>
+    <name>Route BIKF - LEBL (WOW)</name>
+    <styleUrl>#schengenStyle</styleUrl>
+    <LineString>
+      <altitudeMode>clampToGround</altitudeMode>
+      <extrude>1</extrude>
+      <tessellate>1</tessellate>
+      <coordinates>
+        -22.605555555555558,63.985
+        2.0832941,41.297445
+      </coordinates>
+    </LineString>
+  </Placemark>
+  <Placemark>
+    <name>Route BIKF - LEBL (PRW)</name>
+    <styleUrl>#schengenStyle</styleUrl>
+    <LineString>
+      <altitudeMode>clampToGround</altitudeMode>
+      <extrude>1</extrude>
+      <tessellate>1</tessellate>
+      <coordinates>
+        -22.605555555555558,63.985
+        2.0832941,41.297445
+      </coordinates>
+    </LineString>
+  </Placemark>
+</Document>
+</kml>

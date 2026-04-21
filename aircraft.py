@@ -232,8 +232,8 @@ def MapFlights(aircrafts):
         while j < len(airports_list) and not found:
 
             if airports_list[j].code == ac.origin:
-                origin_lat = airports_list[j].coordinates[0]
-                origin_lon = airports_list[j].coordinates[1]
+                origin_lat = airports_list[j].lat
+                origin_lon = airports_list[j].lon
                 found = True
             j = j+1
 
@@ -273,8 +273,7 @@ import math
 def LongDistanceArrivals(aircrafts):
 
     result = []
-
-    airports = LoadAirports("airports.txt")  # carregues aeroports
+    airports = LoadAirports("Airports.txt")  # mismo nombre siempre
 
     # Barcelona
     bcn_lat = 41.2974
@@ -284,11 +283,25 @@ def LongDistanceArrivals(aircrafts):
 
         origin_code = aircraft.origin
 
-        # buscar aeroport
         for ap in airports:
             if ap.code == origin_code:
 
-                dist = haversine(bcn_lat, bcn_lon, ap.lat, ap.lon)
+                # --- HAVERSINE INLINE ---
+                R = 6371
+
+                lat1 = math.radians(bcn_lat)
+                lon1 = math.radians(bcn_lon)
+                lat2 = math.radians(ap.lat)
+                lon2 = math.radians(ap.lon)
+
+                dlat = abs(lat1 - lat2)
+                dlon = abs(lon1 - lon2)
+
+                a = math.sin(dlat/2)**2 + math.cos(lat1)*math.cos(lat2)*math.sin(dlon/2)**2
+                c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+
+                dist = R * c
+                # ------------------------
 
                 if dist > 2000:
                     result.append(aircraft)
@@ -306,3 +319,7 @@ if __name__ == "__main__":
     long_flights = LongDistanceArrivals(aircrafts)
 
     print("Vols de més de 2000 km:", len(long_flights))
+    PlotArrivals(aircrafts)
+    PlotAirlines(aircrafts)
+    PlotFlightsType(aircrafts)
+    MapFlights(aircrafts)
