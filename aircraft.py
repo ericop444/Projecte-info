@@ -92,16 +92,16 @@ def SaveFlights(aircrafts, filename):
         with open(filename, "w") as f:
             f.write("AIRCRAFT ORIGIN ARRIVAL AIRLINE\n")
 
-        i=0
-        while i < len(aircrafts):
-            a = aircrafts[i]
-            #fem servir les classes per escriure linies
-            a_id = a.id if a.id else "-"
-            a_origin = a.origin if a.origin else "''"
-            a_time = a.time if a.time else "''"
-            a_airline = a.airline if a.airline else "''"
-            f.write(f"{a_id} {a_origin} {a_time} {a_airline}\n")
-            i +=1
+            i = 0
+            while i < len(aircrafts):
+                a = aircrafts[i]
+                a_id = a.id if a.id else "-"
+                a_origin = a.origin if a.origin else "-"
+                a_time = a.time if a.time else "-"
+                a_airline = a.airline if a.airline else "-"
+
+                f.write(f"{a_id} {a_origin} {a_time} {a_airline}\n")
+                i += 1
 
         return 0
     #retornem error si n'hi ha
@@ -167,21 +167,21 @@ def PlotFlightsType(aircrafts):
             non_schengen_count += 1
         i += 1
 
-        # Creamos el gráfico con forma "stacked bars"
-        labels = ['Arrivals']  # Solo necesitamos esta columna, ya que las dos salidas van encima.
+    # Creamos el gráfico con forma "stacked bars"
+    labels = ['Arrivals']  # Solo necesitamos esta columna, ya que las dos salidas van encima.
 
-        fig, ax = plt.subplots()
+    fig, ax = plt.subplots()
 
-        ax.bar(labels, [schengen_count], label='Schengen', color='blue')
+    ax.bar(labels, [schengen_count], label='Schengen', color='blue')
 
-        # Para que se apilen las gráficas el parámetro 'bottom' empieza donde acaba la otra:
-        ax.bar(labels, [non_schengen_count], bottom=[schengen_count], label='No Schengen', color='lightcoral')
+    # Para que se apilen las gráficas el parámetro 'bottom' empieza donde acaba la otra:
+    ax.bar(labels, [non_schengen_count], bottom=[schengen_count], label='No Schengen', color='lightcoral')
 
-        ax.set_ylabel('Number of flights')
-        ax.set_title('Schengen vs Non-Schengen Arrivals')
-        ax.legend()  # Esto muestra la leyenda de colores
+    ax.set_ylabel('Number of flights')
+    ax.set_title('Schengen vs Non-Schengen Arrivals')
+    ax.legend()  # Esto muestra la leyenda de colores
 
-        plt.show()
+    plt.show()
 
 # Función 6
 from airport import LoadAirports
