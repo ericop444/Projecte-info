@@ -229,4 +229,12 @@ class Gate:
         self.name = name #guardo un nom
         self.occupied = False #comprovo si esta ocupada
         self.aircraft_id = None #quin avió hi ha
+class BoardingArea:
+    def __init__(self, name, area_type):
+        self.name = name #el nom: A,B,C
+        self.area_type = area_type  #si es schengen o no schengen
+        self.gates = []
+class Terminal:
+
+
 
