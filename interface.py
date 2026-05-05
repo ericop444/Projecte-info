@@ -1,20 +1,18 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox  #Para abrir archivos y mostrar mensajes
+from tkinter import filedialog, messagebox
 from airport import *
+from aircraft import * # ¡FALTABA ESTO!
 import matplotlib.pyplot as plt
 
-
-#principal
+# principal
 root = tk.Tk()
 root.title("Gestión de Aeropuertos")
-root.geometry("450x850")  #Tamaño ajustado para la lista de botones
+root.geometry("450x850")
 
-#lista de aeropuertos
+# lista de aeropuertos
 airports = []
 aircrafts = []
 
-#funciones
-    #Lee los datos de las cajas de texto, crea un objeto Airport y lo añade a la lista si no existe
 def add_airport():
     icaocode = entry_icao.get().upper()
     try:
@@ -31,9 +29,7 @@ def add_airport():
     new_airport = Airport(icaocode, lat, lon)
     SetSchengen(new_airport)
 
-    #Devuelve 0 si hay éxito y -1 si ya existe
     result = AddAirport(airports, new_airport)
-
     if result == -1:
         messagebox.showerror("Error", f"El aeropuerto {icaocode} ya existe.")
     else:
@@ -42,22 +38,18 @@ def add_airport():
         entry_lat.delete(0, tk.END)
         entry_lon.delete(0, tk.END)
 
-
 def remove_airport():
     icaocode = entry_icao.get().upper()
     if len(icaocode) != 4:
         messagebox.showerror("Error", "Introduce un código ICAO válido")
         return
 
-    #Devuelve 0 si lo borra, y -1 si no lo encuentra
     result = RemoveAirport(airports, icaocode)
-
     if result == 0:
         messagebox.showinfo("Éxito", f"Aeropuerto {icaocode} eliminado correctamente")
-        entry_icao.delete(0, tk.END)  #Limpiar la caja de texto al borrar
+        entry_icao.delete(0, tk.END)
     else:
         messagebox.showerror("Error", f"No se encontró el aeropuerto {icaocode}")
-
 
 def load_airports_file():
     filename = filedialog.askopenfilename(title="Selecciona archivo de aeropuertos")
@@ -66,29 +58,22 @@ def load_airports_file():
     try:
         global airports
         airports = LoadAirports(filename)
-
-
         i = 0
         while i < len(airports):
             SetSchengen(airports[i])
             i += 1
-
         messagebox.showinfo("Éxito", f"Cargados {len(airports)} aeropuertos desde el archivo")
     except Exception as e:
         messagebox.showerror("Error", f"No se pudo cargar el archivo:\n{e}")
-
 
 def save_schengen_airports():
     if not airports:
         messagebox.showerror("Error", "No hay aeropuertos cargados")
         return
-
     filename = filedialog.asksaveasfilename(title="Guardar aeropuertos Schengen", defaultextension=".txt")
     if not filename:
         return
-
     try:
-        #Devuelve -1 si hay un error o no hay schengen
         result = SaveSchengenAirports(airports, filename)
         if result == -1:
             messagebox.showwarning("Aviso", "No se guardó el archivo (tal vez no hay aeropuertos Schengen).")
@@ -97,24 +82,17 @@ def save_schengen_airports():
     except Exception as e:
         messagebox.showerror("Error", f"No se pudo guardar el archivo:\n{e}")
 
-
 def show_airports():
     if not airports:
         messagebox.showerror("Error", "No hay aeropuertos cargados")
         return
-
     info = ""
-
     i = 0
     while i < len(airports):
         ap = airports[i]
-
         info += f"{ap.code} - Lat: {ap.lat:.4f}, Lon: {ap.lon:.4f}, Schengen: {ap.isSchengen}\n"
         i += 1
-
-    #Ventana emergente
     messagebox.showinfo("Lista de Aeropuertos", info)
-
 
 def plot_airports():
     if not airports:
@@ -124,7 +102,6 @@ def plot_airports():
         PlotAirports(airports)
     except Exception as e:
         messagebox.showerror("Error", f"No se pudo mostrar gráfico:\n{e}")
-
 
 def map_airports():
     if not airports:
@@ -182,16 +159,13 @@ def map_long_trajectories():
     if not aircrafts:
         messagebox.showerror("Error", "No hay vuelos")
         return
-    # Filtramos primero los de larga distancia (>2000km) y luego los mapeamos
     long_dist_flights = LongDistanceArrivals(aircrafts)
     if not long_dist_flights:
         messagebox.showinfo("Aviso", "No hay vuelos de más de 2000km")
         return
     MapFlights(long_dist_flights)
 
-
-#interfaz
-#entradas
+# entradas
 tk.Label(root, text="Código ICAO:").pack(pady=(10, 0))
 entry_icao = tk.Entry(root)
 entry_icao.pack()
@@ -204,7 +178,7 @@ tk.Label(root, text="Longitud:").pack()
 entry_lon = tk.Entry(root)
 entry_lon.pack()
 
-#Botones de la version 1
+# Botones de la version 1
 tk.Button(root, text="Agregar aeropuerto", width=35, command=add_airport).pack(pady=(15, 5))
 tk.Button(root, text="Eliminar aeropuerto", width=35, command=remove_airport).pack(pady=5)
 tk.Button(root, text="Cargar aeropuertos desde archivo", width=35, command=load_airports_file).pack(pady=5)
@@ -213,13 +187,13 @@ tk.Button(root, text="Mostrar aeropuertos", width=35, command=show_airports).pac
 tk.Button(root, text="Graficar aeropuertos", width=35, command=plot_airports).pack(pady=5)
 tk.Button(root, text="Mostrar aeropuertos en Google Earth", width=35, command=map_airports).pack(pady=5)
 
-#Botones de la versión 2
+# Botones de la versión 2 (¡CORREGIDOS NOMBRES!)
 tk.Button(root, text="Cargar llegadas", width=35, command=load_arrivals_file).pack(pady=5)
-tk.Button(root, text="Guardar vuelos", width=35, command=save_flights_file).pack(pady=5)
-tk.Button(root, text="Graficar llegadas por hora", width=35, command=plot_arrivals).pack(pady=5)
-tk.Button(root, text="Graficar vuelos por compañía", width=35, command=plot_airlines).pack(pady=5)
-tk.Button(root, text="Graficar Schengen vs No-Schengen", width=35, command=plot_flights_type).pack(pady=5)
-tk.Button(root, text="Mostrar trayectorias en Google Earth", width=35, command=map_flights).pack(pady=5)
-tk.Button(root, text="Mostrar solo larga distancia en Google Earth", width=35, command=map_long_distance).pack(pady=5)
+tk.Button(root, text="Guardar vuelos", width=35, command=save_aircrafts_file).pack(pady=5)
+tk.Button(root, text="Graficar llegadas por hora", width=35, command=plot_arrivals_hour).pack(pady=5)
+tk.Button(root, text="Graficar vuelos por compañía", width=35, command=plot_arrivals_airline).pack(pady=5)
+tk.Button(root, text="Graficar Schengen vs No-Schengen", width=35, command=plot_arrivals_type).pack(pady=5)
+tk.Button(root, text="Mostrar trayectorias en Google Earth", width=35, command=map_all_trajectories).pack(pady=5)
+tk.Button(root, text="Mostrar solo larga distancia en Google Earth", width=35, command=map_long_trajectories).pack(pady=5)
 
 root.mainloop()
