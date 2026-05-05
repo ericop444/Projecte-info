@@ -223,3 +223,10 @@ if __name__ == "__main__":
     vuelos = LoadArrivals("Arrivals.txt")
     if vuelos:
         print(f"Cargados {len(vuelos)} vuelos.")
+
+class Gate:
+    def __init__(self, name): #li poso un nom
+        self.name = name #guardo un nom
+        self.occupied = False #comprovo si esta ocupada
+        self.aircraft_id = None #quin avió hi ha
+
