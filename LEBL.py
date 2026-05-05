@@ -10,19 +10,19 @@ class BoardingArea:
 
 #Inici codi segona part
 def SetGates(area, init_gate, end_gate, prefix):
-    # Inicializamos nuestro contador en el número de la primera puerta
+    #Comencem el contador al num d la primera porta
     contador = init_gate
 
-    # El bucle seguirá ejecutándose fins que el contador superi l'ultima porta
+    # El bucle seguira executantse fins que el contador superi l'ultima porta
     while contador <= end_gate:
 
         nombre_puerta = prefix + str(contador)
 
-        # 2. Creamos el objeto Gate (usando la clase que hará el Integrante 1)
+        #Creem objecte
         nueva_puerta = Gate(nombre_puerta)
 
-        # 3. Lo añadimos a la lista de puertas de esta área
+        # L'afegim a la llista de portes de l'area
         area.gates.append(nueva_puerta)
 
-        # 4. MUY IMPORTANTE: Sumamos 1 al contador para que el while no sea infinito
+        # Augmentem el contador xq el while acabi
         contador += 1
