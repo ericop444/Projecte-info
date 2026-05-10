@@ -137,6 +137,7 @@ def PlotFlightsType(aircrafts):
 def MapFlights(aircrafts):
     if len(aircrafts) == 0:
         print("Error: The list of aircrafts is empty.")
+
         return
 
     airports_list = LoadAirports("Airports.txt")

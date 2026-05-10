@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
-  <Style id="schengenStyle">
-    <LineStyle>
-      <color>ffff0000</color>
-      <width>2</width>
-    </LineStyle>
-  </Style>
-  <Style id="nonSchengenStyle">
-    <LineStyle>
-      <color>ff0000ff</color>
-      <width>2</width>
-    </LineStyle>
-  </Style>
+  <Style id="schengenStyle"><LineStyle><color>ffff0000</color><width>2</width></LineStyle></Style>
+  <Style id="nonSchengenStyle"><LineStyle><color>ff0000ff</color><width>2</width></LineStyle></Style>
   <Placemark>
     <name>Route BIKF - LEBL (VLG)</name>
     <styleUrl>#schengenStyle</styleUrl>
