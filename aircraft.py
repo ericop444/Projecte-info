@@ -235,6 +235,43 @@ class BoardingArea:
         self.area_type = area_type  #si es schengen o no schengen
         self.gates = []
 class Terminal:
+    def __init__(self, name):
+        self.name = name
+        self.boarding_areas = []
+        self.airlines = []
+class BarcelonaAP:
+    def __init__(self, code):
+        self.code = code
+        self.terminals = []
+def SetGates(area, init_gate, end_gate, prefix):
+    if end_gate <= init_gate:
+        return -1
+    area.gates = []  # Esborrem llista anterior
+    for i in range(init_gate, end_gate + 1):
+        gate_name = prefix + str(i)
+        gate = Gate(gate_name)
+        area.gates.append(gate)
+def LoadAirlines(terminal, t_name):
+
+    filename = t_name + "_Airlines.txt"
+
+    try:
+        f = open(filename, "r")
+    except:
+        return -1
+
+    terminal.airlines = []
+
+    for line in f:
+
+        parts = line.strip().split("\t")
+
+        if len(parts) == 2:
+            airline_code = parts[1]
+
+            terminal.airlines.append(airline_code)
+ f.close()
+
 
 
 
