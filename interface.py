@@ -12,6 +12,8 @@ root.geometry("450x850")
 # lista de aeropuertos
 airports = []
 aircrafts = []
+bcn_airport = None
+
 
 def add_airport():
     icaocode = entry_icao.get().upper()
@@ -165,6 +167,68 @@ def map_long_trajectories():
         return
     MapFlights(long_dist_flights)
 
+
+# Funciones version 3
+
+def load_bcn_structure():
+    filename = filedialog.askopenfilename(title="Selecciona estructura del aeropuerto (LEBL.txt)")
+    if not filename:
+        return
+    try:
+        global bcn_airport
+        bcn_airport = LoadAirportStructure(filename)
+        if bcn_airport:
+            messagebox.showinfo("Éxito", "Estructura del aeropuerto cargada correctamente")
+    except Exception as e:
+        messagebox.showerror("Error", f"No se pudo cargar la estructura:\n{e}")
+
+
+def assign_gates_v3():
+    if not bcn_airport:
+        messagebox.showerror("Error", "Primero debes cargar la estructura del aeropuerto")
+        return
+    if not aircrafts:
+        messagebox.showerror("Error", "No hay vuelos (llegadas) cargados")
+        return
+
+    # Asignamos puertas a cada avion de la lista
+    i = 0
+    count_errors = 0
+    while i < len(aircrafts):
+        result = AssignGate(bcn_airport, aircrafts[i])
+        if result == -1:  # Devolvemos un error si no hay puertas libres
+            count_errors += 1
+        i += 1
+
+    if count_errors > 0:
+        messagebox.showwarning("Aviso", f"Proceso finalizado. {count_errors} vuelos no pudieron obtener puerta.")
+    else:
+        messagebox.showinfo("Éxito", "Puertas asignadas a todos los vuelos correctamente")
+
+
+def show_gates_occupancy():
+    if not bcn_airport:
+        messagebox.showerror("Error", "No hay datos de aeropuerto")
+        return
+
+
+    gates_list = GateOccupancy(bcn_airport)
+
+    # Mostramos un resumen por consola
+    info = "Estado de las puertas:\n"
+    i = 0
+    while i < len(gates_list):
+        gate = gates_list[i]
+        # gate[0] es nombre gate[1] es ocupada(True/False) gate[2] es id_avion
+        estado = "OCUPADA" if gate[1] else "LIBRE"
+        info += f"Puerta: {gate[0]} - {estado} ({gate[2]})\n"
+        i += 1
+        if i > 20:  # Para que quepa el texto en la pantalla
+            info += "...(lista truncada)..."
+            break
+
+    messagebox.showinfo("Ocupación de Puertas", info)
+
 # entradas
 tk.Label(root, text="Código ICAO:").pack(pady=(10, 0))
 entry_icao = tk.Entry(root)
@@ -195,5 +259,12 @@ tk.Button(root, text="Graficar vuelos por compañía", width=35, command=plot_ar
 tk.Button(root, text="Graficar Schengen vs No-Schengen", width=35, command=plot_arrivals_type).pack(pady=5)
 tk.Button(root, text="Mostrar trayectorias en Google Earth", width=35, command=map_all_trajectories).pack(pady=5)
 tk.Button(root, text="Mostrar solo larga distancia en Google Earth", width=35, command=map_long_trajectories).pack(pady=5)
+
+# Botones versión 3
+tk.Label(root, text="--- Gestión de Puertas (V3) ---", fg="blue").pack(pady=(10, 0))
+tk.Button(root, text="Cargar estructura aeropuerto (LEBL.txt)", width=35, command=load_bcn_structure).pack(pady=5)
+tk.Button(root, text="Asignar puertas a vuelos", width=35, command=assign_gates_v3).pack(pady=5)
+tk.Button(root, text="Mostrar ocupación de puertas", width=35, command=show_gates_occupancy).pack(pady=5)
+
 
 root.mainloop()
