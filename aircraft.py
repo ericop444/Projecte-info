@@ -137,7 +137,6 @@ def PlotFlightsType(aircrafts):
 def MapFlights(aircrafts):
     if len(aircrafts) == 0:
         print("Error: The list of aircrafts is empty.")
-
         return
 
     airports_list = LoadAirports("Airports.txt")
@@ -220,7 +219,58 @@ def LongDistanceArrivals(aircrafts):
                 break
     return result
 
+if __name__ == "__main__":
+    vuelos = LoadArrivals("Arrivals.txt")
+    if vuelos:
+        print(f"Cargados {len(vuelos)} vuelos.")
 
+class Gate:
+    def __init__(self, name): #li poso un nom
+        self.name = name #guardo un nom
+        self.occupied = False #comprovo si esta ocupada
+        self.aircraft_id = None #quin avió hi ha
+class BoardingArea:
+    def __init__(self, name, area_type):
+        self.name = name #el nom: A,B,C
+        self.area_type = area_type  #si es schengen o no schengen
+        self.gates = []
+class Terminal:
+    def __init__(self, name):
+        self.name = name
+        self.boarding_areas = []
+        self.airlines = []
+class BarcelonaAP:
+    def __init__(self, code):
+        self.code = code
+        self.terminals = []
+def SetGates(area, init_gate, end_gate, prefix):
+    if end_gate <= init_gate:
+        return -1
+    area.gates = []  # Esborrem llista anterior
+    for i in range(init_gate, end_gate + 1):
+        gate_name = prefix + str(i)
+        gate = Gate(gate_name)
+        area.gates.append(gate)
+def LoadAirlines(terminal, t_name):
+
+    filename = t_name + "_Airlines.txt"
+
+    try:
+        f = open(filename, "r")
+    except:
+        return -1
+
+    terminal.airlines = []
+
+    for line in f:
+
+        parts = line.strip().split("\t")
+
+        if len(parts) == 2:
+            airline_code = parts[1]
+
+            terminal.airlines.append(airline_code)
+ f.close()
 
 
 
