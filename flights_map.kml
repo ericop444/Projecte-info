@@ -4,33 +4,20 @@
   <Style id="schengenStyle"><LineStyle><color>ffff0000</color><width>2</width></LineStyle></Style>
   <Style id="nonSchengenStyle"><LineStyle><color>ff0000ff</color><width>2</width></LineStyle></Style>
   <Placemark>
-    <name>Route LYBE - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta LGSR - LEBL (VLG)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        20.306944444444444,44.81944444444445
+        25.479166666666664,36.399166666666666
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGCC - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -2.275,53.35388888888889
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route KJFK - LEBL (AAL)</name>
+    <name>Ruta KJFK - LEBL (AAL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -43,20 +30,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LROP - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta BIKF - LEBL (VLG)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        26.084999999999997,44.571111111111115
+        -22.605555555555558,63.985
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route URKK - LEBL (VLG)</name>
+    <name>Ruta URKK - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -69,7 +56,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route UUEE - LEBL (ABG)</name>
+    <name>Ruta UUEE - LEBL (ABG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -82,7 +69,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route KATL - LEBL (DAL)</name>
+    <name>Ruta EFHK - LEBL (FIN)</name>
+    <styleUrl>#schengenStyle</styleUrl>
+    <LineString>
+      <altitudeMode>clampToGround</altitudeMode>
+      <extrude>1</extrude>
+      <tessellate>1</tessellate>
+      <coordinates>
+        24.96333333333333,60.31722222222223
+        2.0832941,41.297445
+      </coordinates>
+    </LineString>
+  </Placemark>
+  <Placemark>
+    <name>Ruta KATL - LEBL (DAL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -95,7 +95,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route ULLI - LEBL (VLG)</name>
+    <name>Ruta ULLI - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -108,7 +108,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route UUDD - LEBL (VLG)</name>
+    <name>Ruta LGMK - LEBL (VLG)</name>
+    <styleUrl>#schengenStyle</styleUrl>
+    <LineString>
+      <altitudeMode>clampToGround</altitudeMode>
+      <extrude>1</extrude>
+      <tessellate>1</tessellate>
+      <coordinates>
+        25.34722222222222,37.43722222222222
+        2.0832941,41.297445
+      </coordinates>
+    </LineString>
+  </Placemark>
+  <Placemark>
+    <name>Ruta UUDD - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -121,20 +134,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGLL - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.4613888888888889,51.4775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route OLBA - LEBL (VLG)</name>
+    <name>Ruta OLBA - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -147,7 +147,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route KEWR - LEBL (UAL)</name>
+    <name>Ruta KEWR - LEBL (UAL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -160,7 +160,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route SBGR - LEBL (SIA)</name>
+    <name>Ruta SBGR - LEBL (SIA)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -173,33 +173,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EIDW - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -6.27,53.421388888888885
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGKK - LEBL (MON)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LTBA - LEBL (THY)</name>
+    <name>Ruta LTBA - LEBL (THY)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -212,46 +186,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGBB - LEBL (MON)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -1.7480555555555557,52.45388888888889
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGGD - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -2.7191666666666667,51.382777777777775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EIDW - LEBL (EIN)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -6.27,53.421388888888885
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route CYUL - LEBL (ROU)</name>
+    <name>Ruta CYUL - LEBL (ROU)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -264,46 +199,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGGP - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -2.8497222222222223,53.33361111111111
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGCC - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -2.275,53.35388888888889
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGPH - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -3.3725,55.95
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route UWKD - LEBL (VLG)</name>
+    <name>Ruta UWKD - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -316,72 +212,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route DAAG - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        3.2144444444444447,36.693888888888885
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGAA - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -6.215833333333333,54.6575
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGBB - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -1.7480555555555557,52.45388888888889
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LROP - LEBL (ROT)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        26.084999999999997,44.571111111111115
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LROP - LEBL (BMS)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        26.084999999999997,44.571111111111115
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LLBG - LEBL (AEA)</name>
+    <name>Ruta LLBG - LEBL (AEA)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -394,20 +225,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGLL - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.4613888888888889,51.4775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route KMIA - LEBL (AAL)</name>
+    <name>Ruta KMIA - LEBL (AAL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -420,20 +238,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGKK - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GCLP - LEBL (VLG)</name>
+    <name>Ruta GCLP - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -446,20 +251,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGCC - LEBL (MON)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ENGM - LEBL (SAS)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -2.275,53.35388888888889
+        11.08388888888889,60.20277777777778
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route KPHL - LEBL (AAL)</name>
+    <name>Ruta KPHL - LEBL (AAL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -472,7 +277,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route UUEE - LEBL (AFL)</name>
+    <name>Ruta UUEE - LEBL (AFL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -485,7 +290,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route GCXO - LEBL (VLG)</name>
+    <name>Ruta GCXO - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -498,7 +303,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route ULLI - LEBL (SDM)</name>
+    <name>Ruta ULLI - LEBL (SDM)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -511,59 +316,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LDZA - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ENGM - LEBL (NAX)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        16.06888888888889,45.74305555555556
+        11.08388888888889,60.20277777777778
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGSS - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        0.23500000000000001,51.885
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGGW - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.3683333333333333,51.874722222222225
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGCC - LEBL (EXS)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -2.275,53.35388888888889
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LLBG - LEBL (ZZZ)</name>
+    <name>Ruta LLBG - LEBL (ZZZ)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -576,7 +342,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route CYYZ - LEBL (ROU)</name>
+    <name>Ruta CYYZ - LEBL (ROU)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -589,20 +355,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LDSP - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        16.298055555555557,43.538888888888884
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LLBG - LEBL (VLG)</name>
+    <name>Ruta LLBG - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -615,59 +368,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route GMMN - LEBL (RAM)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -7.581666666666666,33.36416666666667
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGGW - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.3683333333333333,51.874722222222225
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route DTTA - LEBL (TAR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        10.226944444444445,36.85111111111111
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGNM - LEBL (EXS)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -1.6608333333333332,53.86611111111111
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route KJFK - LEBL (DAL)</name>
+    <name>Ruta KJFK - LEBL (DAL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -680,20 +381,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGLL - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.4613888888888889,51.4775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route KCLT - LEBL (AAL)</name>
+    <name>Ruta KCLT - LEBL (AAL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -706,20 +394,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGKK - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route CYUL - LEBL (TSC)</name>
+    <name>Ruta CYUL - LEBL (TSC)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -732,7 +407,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route CYYZ - LEBL (TSC)</name>
+    <name>Ruta CYYZ - LEBL (TSC)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -745,20 +420,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGKK - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route KIAD - LEBL (UAL)</name>
+    <name>Ruta KIAD - LEBL (UAL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -771,7 +433,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route UKBB - LEBL (AUI)</name>
+    <name>Ruta UKBB - LEBL (AUI)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -784,7 +446,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LLBG - LEBL (ELY)</name>
+    <name>Ruta LLBG - LEBL (ELY)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -797,20 +459,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGNX - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -1.3277777777777777,52.83111111111111
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LTFJ - LEBL (THY)</name>
+    <name>Ruta LTFJ - LEBL (THY)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -823,7 +472,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route UKBB - LEBL (AUI)</name>
+    <name>Ruta UKBB - LEBL (AUI)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -836,20 +485,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGBB - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -1.7480555555555557,52.45388888888889
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route OTHH - LEBL (QTR)</name>
+    <name>Ruta OTHH - LEBL (QTR)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -862,7 +498,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route OMDB - LEBL (UAE)</name>
+    <name>Ruta OMDB - LEBL (UAE)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -875,20 +511,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route GMMX - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -8.040833333333333,31.608611111111113
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LTBA - LEBL (THY)</name>
+    <name>Ruta LTBA - LEBL (THY)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -901,7 +524,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LTFJ - LEBL (PGT)</name>
+    <name>Ruta EYVI - LEBL (RYR)</name>
+    <styleUrl>#schengenStyle</styleUrl>
+    <LineString>
+      <altitudeMode>clampToGround</altitudeMode>
+      <extrude>1</extrude>
+      <tessellate>1</tessellate>
+      <coordinates>
+        25.28777777777778,54.636944444444445
+        2.0832941,41.297445
+      </coordinates>
+    </LineString>
+  </Placemark>
+  <Placemark>
+    <name>Ruta LTFJ - LEBL (PGT)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -914,7 +550,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route HECA - LEBL (MSR)</name>
+    <name>Ruta HECA - LEBL (MSR)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -927,72 +563,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGLL - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.4613888888888889,51.4775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GMFF - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -4.977777777777778,33.92722222222222
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route ETNL - LEBL (LAV)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        12.278333333333334,53.91916666666666
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGKK - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGKK - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route SKBO - LEBL (AVA)</name>
+    <name>Ruta SKBO - LEBL (AVA)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1005,46 +576,33 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGLL - LEBL (ROJ)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ENBR - LEBL (IBK)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -0.4613888888888889,51.4775
+        5.218055555555556,60.29361111111111
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LYTV - LEBL (EXU)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ESSA - LEBL (IBK)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        18.723333333333333,42.40472222222222
+        17.91861111111111,59.651944444444446
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGSS - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        0.23500000000000001,51.885
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GCXO - LEBL (IBK)</name>
+    <name>Ruta GCXO - LEBL (IBK)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1057,7 +615,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route SAEZ - LEBL (ARG)</name>
+    <name>Ruta SAEZ - LEBL (ARG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1070,7 +628,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route UUEE - LEBL (AFL)</name>
+    <name>Ruta UUEE - LEBL (AFL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1083,7 +641,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route SBGR - LEBL (TAM)</name>
+    <name>Ruta SBGR - LEBL (TAM)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1096,20 +654,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route GMMN - LEBL (MAC)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta EFHK - LEBL (IBK)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -7.581666666666666,33.36416666666667
+        24.96333333333333,60.31722222222223
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LTBA - LEBL (THY)</name>
+    <name>Ruta LTBA - LEBL (THY)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1122,7 +680,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LTFJ - LEBL (PGT)</name>
+    <name>Ruta LTFJ - LEBL (PGT)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1135,20 +693,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGNT - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -1.6897222222222223,55.03805555555555
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route UUDD - LEBL (KTK)</name>
+    <name>Ruta UUDD - LEBL (KTK)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1161,7 +706,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route GCFV - LEBL (VLG)</name>
+    <name>Ruta GCFV - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1174,137 +719,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LDDU - LEBL (ZZZ)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ENGM - LEBL (SAS)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        18.26833333333333,42.561388888888885
+        11.08388888888889,60.20277777777778
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGGP - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -2.8497222222222223,53.33361111111111
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGLL - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.4613888888888889,51.4775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGGP - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -2.8497222222222223,53.33361111111111
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GMMN - LEBL (RAM)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -7.581666666666666,33.36416666666667
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGKK - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGKK - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GMMX - LEBL (EXU)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -8.040833333333333,31.608611111111113
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGFF - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -3.3433333333333333,51.39666666666667
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGNM - LEBL (MON)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -1.6608333333333332,53.86611111111111
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GCXO - LEBL (VLG)</name>
+    <name>Ruta GCXO - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1317,59 +745,59 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGSS - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ESKN - LEBL (RYR)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        0.23500000000000001,51.885
+        16.90361111111111,58.78861111111111
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route GCRR - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta EVRA - LEBL (WZZ)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -13.605277777777777,28.945555555555554
+        23.97111111111111,56.92361111111111
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LRCL - LEBL (WZZ)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ESSA - LEBL (NAX)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        23.692222222222224,46.78916666666667
+        17.91861111111111,59.651944444444446
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGNM - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ENGM - LEBL (VLG)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -1.6608333333333332,53.86611111111111
+        11.08388888888889,60.20277777777778
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route GCLP - LEBL (VLG)</name>
+    <name>Ruta GCLP - LEBL (VLG)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1382,7 +810,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route GCXO - LEBL (AEA)</name>
+    <name>Ruta GCXO - LEBL (AEA)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1395,33 +823,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGLL - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.4613888888888889,51.4775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGKK - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route OTHH - LEBL (QTR)</name>
+    <name>Ruta OTHH - LEBL (QTR)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1434,46 +836,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route DAAG - LEBL (DAH)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta EFHK - LEBL (FIN)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        3.2144444444444447,36.693888888888885
+        24.96333333333333,60.31722222222223
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGMC - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        0.6933333333333334,51.57027777777778
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGLL - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.4613888888888889,51.4775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route OMDB - LEBL (UAE)</name>
+    <name>Ruta OMDB - LEBL (UAE)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1486,85 +862,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EIDW - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ESSA - LEBL (VLG)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -6.27,53.421388888888885
+        17.91861111111111,59.651944444444446
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGNT - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -1.6897222222222223,55.03805555555555
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GCRR - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -13.605277777777777,28.945555555555554
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LWSK - LEBL (WZZ)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        21.62138888888889,41.961666666666666
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGPK - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -4.594444444444444,55.50944444444445
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGGP - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -2.8497222222222223,53.33361111111111
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GCLP - LEBL (RYR)</name>
+    <name>Ruta GCLP - LEBL (RYR)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1577,20 +888,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route LBSF - LEBL (WZZ)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        23.40833333333333,42.69499999999999
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route HTDA - LEBL (ZZZ)</name>
+    <name>Ruta HTDA - LEBL (ZZZ)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1603,85 +901,46 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGCC - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta EFHK - LEBL (VLG)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -2.275,53.35388888888889
+        24.96333333333333,60.31722222222223
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGKK - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ENGM - LEBL (IBK)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -0.19027777777777777,51.14805555555556
+        11.08388888888889,60.20277777777778
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGGD - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta BIKF - LEBL (WOW)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -2.7191666666666667,51.382777777777775
+        -22.605555555555558,63.985
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGLL - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.4613888888888889,51.4775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EIDW - LEBL (EIN)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -6.27,53.421388888888885
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GMTT - LEBL (MAC)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -5.921111111111111,35.73166666666667
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LUKK - LEBL (MLD)</name>
+    <name>Ruta LUKK - LEBL (MLD)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1694,33 +953,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGKK - LEBL (IBK)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LROP - LEBL (ROT)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        26.084999999999997,44.571111111111115
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LTBA - LEBL (THY)</name>
+    <name>Ruta LTBA - LEBL (THY)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1733,59 +966,20 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EIDW - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta ENGM - LEBL (IBK)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -6.27,53.421388888888885
+        11.08388888888889,60.20277777777778
         2.0832941,41.297445
       </coordinates>
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGLL - LEBL (BAW)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.4613888888888889,51.4775
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGKK - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route LDDU - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        18.26833333333333,42.561388888888885
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route UUEE - LEBL (AFL)</name>
+    <name>Ruta UUEE - LEBL (AFL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1798,33 +992,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EIDW - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -6.27,53.421388888888885
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGGW - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.3683333333333333,51.874722222222225
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route UUDD - LEBL (AUL)</name>
+    <name>Ruta UUDD - LEBL (AUL)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1837,20 +1005,7 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGSS - LEBL (RYR)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        0.23500000000000001,51.885
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route GCLP - LEBL (IBK)</name>
+    <name>Ruta GCLP - LEBL (IBK)</name>
     <styleUrl>#nonSchengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
@@ -1863,53 +1018,14 @@
     </LineString>
   </Placemark>
   <Placemark>
-    <name>Route EGKK - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
+    <name>Ruta BIKF - LEBL (PRW)</name>
+    <styleUrl>#schengenStyle</styleUrl>
     <LineString>
       <altitudeMode>clampToGround</altitudeMode>
       <extrude>1</extrude>
       <tessellate>1</tessellate>
       <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGKK - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.19027777777777777,51.14805555555556
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGGW - LEBL (EZY)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -0.3683333333333333,51.874722222222225
-        2.0832941,41.297445
-      </coordinates>
-    </LineString>
-  </Placemark>
-  <Placemark>
-    <name>Route EGCC - LEBL (VLG)</name>
-    <styleUrl>#nonSchengenStyle</styleUrl>
-    <LineString>
-      <altitudeMode>clampToGround</altitudeMode>
-      <extrude>1</extrude>
-      <tessellate>1</tessellate>
-      <coordinates>
-        -2.275,53.35388888888889
+        -22.605555555555558,63.985
         2.0832941,41.297445
       </coordinates>
     </LineString>
