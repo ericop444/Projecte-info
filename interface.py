@@ -251,7 +251,7 @@ tk.Button(root, text="Mostrar aeropuertos", width=35, command=show_airports).pac
 tk.Button(root, text="Graficar aeropuertos", width=35, command=plot_airports).pack(pady=5)
 tk.Button(root, text="Mostrar aeropuertos en Google Earth", width=35, command=map_airports).pack(pady=5)
 
-# Botones de la versión 2 (¡CORREGIDOS NOMBRES!)
+# Botones de la versión 2
 tk.Button(root, text="Cargar llegadas", width=35, command=load_arrivals_file).pack(pady=5)
 tk.Button(root, text="Guardar vuelos", width=35, command=save_aircrafts_file).pack(pady=5)
 tk.Button(root, text="Graficar llegadas por hora", width=35, command=plot_arrivals_hour).pack(pady=5)
