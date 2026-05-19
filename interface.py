@@ -562,3 +562,5 @@ status.set("Llest — carrega un fitxer per començar")
 _refresh()
 
 root.mainloop()
+
+#creacio v4
