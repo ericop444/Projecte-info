@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, ttk
 
 from airport import *
 from aircraft import *
@@ -16,6 +16,7 @@ ACCENT_BLUE = "#4f8ef7"
 ACCENT_GRN  = "#3ecf8e"
 ACCENT_ORG  = "#f0883e"
 ACCENT_PRP  = "#a78bfa"
+ACCENT_RED  = "#f87171"
 TEXT_MAIN   = "#e8eaf6"
 TEXT_SUB    = "#8892b0"
 BORDER      = "#2d3154"
@@ -23,9 +24,10 @@ BORDER      = "#2d3154"
 # -------------------------------------------------------
 # VARIABLES GLOBALS
 # -------------------------------------------------------
-airports    = []
-aircrafts   = []
-bcn_airport = None
+airports     = []
+aircrafts    = []       # Arribades (o moviments fusionats a la v4)
+departures   = []       # Sortides (v4)
+bcn_airport  = None
 
 
 # =====================================================
@@ -48,10 +50,10 @@ class HoverButton(tk.Label):
             relief="flat",
             **kwargs
         )
-        self._color  = color
+        self._color   = color
         self._command = command
-        self.bind("<Enter>",   self._on_enter)
-        self.bind("<Leave>",   self._on_leave)
+        self.bind("<Enter>",    self._on_enter)
+        self.bind("<Leave>",    self._on_leave)
         self.bind("<Button-1>", self._on_click)
 
     def _lighten(self, hex_color, amount=30):
@@ -77,14 +79,11 @@ class Section(tk.Frame):
     def __init__(self, parent, title, accent, icon="", **kwargs):
         super().__init__(parent, bg=BG_DARK, **kwargs)
 
-        # Barra lateral de color
         tk.Frame(self, bg=accent, width=4).pack(side="left", fill="y")
 
-        # Contingut interior
         inner = tk.Frame(self, bg=BG_PANEL, pady=12, padx=14)
         inner.pack(side="left", fill="both", expand=True)
 
-        # Capçalera
         hdr = tk.Frame(inner, bg=BG_PANEL)
         hdr.pack(fill="x", pady=(0, 6))
         tk.Label(hdr, text=icon, bg=BG_PANEL, fg=accent,
@@ -92,10 +91,8 @@ class Section(tk.Frame):
         tk.Label(hdr, text=title.upper(), bg=BG_PANEL, fg=accent,
                  font=("Consolas", 10, "bold")).pack(side="left")
 
-        # Línia separadora
         tk.Frame(inner, bg=BORDER, height=1).pack(fill="x", pady=(0, 10))
 
-        # Cos públic
         self.body = tk.Frame(inner, bg=BG_PANEL)
         self.body.pack(fill="x")
 
@@ -143,9 +140,10 @@ class StatusBar(tk.Frame):
         self._dot.config(fg=color)
         self._msg.config(text=msg, fg=color)
 
-    def update_counters(self, n_ap, n_fl, lebl):
+    def update_counters(self, n_ap, n_fl, n_dep, lebl):
         lebl_txt = "LEBL ✔" if lebl else "LEBL —"
-        self._cnt.config(text=f"Aeroports: {n_ap}   Vols: {n_fl}   {lebl_txt}")
+        self._cnt.config(
+            text=f"Aeroports: {n_ap}   Vols: {n_fl}   Sortides: {n_dep}   {lebl_txt}")
 
 
 # =====================================================
@@ -158,7 +156,6 @@ def _popup_window(title, accent, w=460, h=400):
     win.geometry(f"{w}x{h}")
     win.configure(bg=BG_DARK)
     win.resizable(False, False)
-    # Capçalera
     hdr = tk.Frame(win, bg=accent, pady=0)
     hdr.pack(fill="x")
     tk.Frame(hdr, bg=accent, height=4).pack(fill="x")
@@ -168,7 +165,6 @@ def _popup_window(title, accent, w=460, h=400):
 
 
 def _add_stats_bar(parent, items):
-    """Barra de resum amb quadres de colors (label, valor, color)"""
     bar = tk.Frame(parent, bg=BG_DARK, pady=8)
     bar.pack(fill="x")
     for label, val, color in items:
@@ -181,7 +177,6 @@ def _add_stats_bar(parent, items):
 
 
 def _add_scrolllist(parent, header, rows, accent):
-    """Llista amb scrollbar estilitzada"""
     frame = tk.Frame(parent, bg=BG_CARD,
                      highlightbackground=BORDER, highlightthickness=1)
     frame.pack(fill="both", expand=True, padx=14, pady=(4, 14))
@@ -207,45 +202,79 @@ def show_airports_popup():
     if not airports:
         messagebox.showerror("Error", "No hi ha aeroports carregats"); return
     n_sch = sum(1 for a in airports if a.isSchengen)
-    win = _popup_window("Llista d'Aeroports", ACCENT_BLUE, w=480, h=420)
+    win   = _popup_window("Llista d'Aeroports", ACCENT_BLUE, w=480, h=420)
     _add_stats_bar(win, [
         ("TOTAL",       len(airports),          TEXT_MAIN),
         ("SCHENGEN",    n_sch,                  ACCENT_GRN),
         ("NO SCHENGEN", len(airports) - n_sch,  ACCENT_ORG),
     ])
     rows = []
-    i = 0
+    i    = 0
     while i < len(airports):
-        a = airports[i]
+        a   = airports[i]
         sch = "SI" if a.isSchengen else "NO"
         rows.append(f"{a.code:<8}  {a.lat:>9.4f}  {a.lon:>11.4f}  {sch}")
         i += 1
-    _add_scrolllist(win, f"{'ICAO':<8}  {'LAT':>9}  {'LON':>11}  SCH", rows, ACCENT_BLUE)
+    _add_scrolllist(win, f"{'ICAO':<8}  {'LAT':>9}  {'LON':>11}  SCH",
+                    rows, ACCENT_BLUE)
 
 
 def show_gates_popup():
     if not bcn_airport:
         messagebox.showerror("Error", "No hi ha estructura de l'aeroport"); return
     gates_list = GateOccupancy(bcn_airport)
-    lliures  = sum(1 for g in gates_list if not g[1])
-    ocupades = sum(1 for g in gates_list if     g[1])
-    win = _popup_window("Ocupació de Portes — LEBL", ACCENT_PRP, w=520, h=460)
+    lliures    = sum(1 for g in gates_list if not g[1])
+    ocupades   = sum(1 for g in gates_list if     g[1])
+    win        = _popup_window("Ocupació de Portes — LEBL", ACCENT_PRP, w=520, h=460)
     _add_stats_bar(win, [
         ("TOTAL",    len(gates_list), TEXT_MAIN),
         ("LLIURES",  lliures,         ACCENT_GRN),
         ("OCUPADES", ocupades,        ACCENT_ORG),
     ])
     rows = []
-    i = 0
+    i    = 0
     while i < len(gates_list):
-        g = gates_list[i]
-        estat  = "OCUPADA" if g[1] else "LLIURE "
-        avio   = g[2] if g[2] else "—"
-        mark   = "●" if g[1] else "○"
+        g     = gates_list[i]
+        estat = "OCUPADA" if g[1] else "LLIURE "
+        avio  = g[2] if g[2] else "—"
+        mark  = "●" if g[1] else "○"
         rows.append(f"{mark} {g[0]:<22}  {estat}  {avio}")
         i += 1
     _add_scrolllist(win, f"  {'PORTA':<22}  {'ESTAT':<7}  AVIÓ", rows, ACCENT_PRP)
     status.set(f"Ocupació: {ocupades} ocupades / {lliures} lliures")
+
+
+def show_movements_popup():
+    """Mostra la llista de moviments fusionats (v4)"""
+    if not aircrafts:
+        messagebox.showerror("Error", "No hi ha vols/moviments carregats"); return
+
+    total    = len(aircrafts)
+    amb_arr  = sum(1 for ac in aircrafts if ac.time is not None)
+    amb_dep  = sum(1 for ac in aircrafts if ac.departure_time is not None)
+    nocturs  = sum(1 for ac in aircrafts if ac.origin is None and ac.time is None)
+
+    win = _popup_window("Llista de Moviments", ACCENT_RED, w=680, h=480)
+    _add_stats_bar(win, [
+        ("TOTAL",    total,   TEXT_MAIN),
+        ("ARRIBADES", amb_arr, ACCENT_GRN),
+        ("SORTIDES",  amb_dep, ACCENT_ORG),
+        ("NOCTURNS",  nocturs, ACCENT_RED),
+    ])
+    rows = []
+    i    = 0
+    while i < len(aircrafts):
+        ac      = aircrafts[i]
+        arr     = ac.time           if ac.time           else "—  "
+        dep     = ac.departure_time if ac.departure_time else "—  "
+        orig    = ac.origin         if ac.origin         else "——"
+        desti   = ac.destination    if ac.destination    else "——"
+        rows.append(f"{ac.id:<10}  {ac.airline:<5}  "
+                    f"{orig:<6}→LEBL {arr:<6}  LEBL→{desti:<6} {dep}")
+        i += 1
+    _add_scrolllist(win,
+        f"{'ID':<10}  {'CIA':<5}  {'ORIG':<6}  ARR    {'DEST':<6}  DEP",
+        rows, ACCENT_RED)
 
 
 # =====================================================
@@ -253,7 +282,8 @@ def show_gates_popup():
 # =====================================================
 
 def _refresh():
-    status.update_counters(len(airports), len(aircrafts), bcn_airport is not None)
+    status.update_counters(len(airports), len(aircrafts),
+                           len(departures), bcn_airport is not None)
 
 # --- Versió 1 ---
 def add_airport():
@@ -275,7 +305,9 @@ def add_airport():
         entry_lat.delete(0, tk.END)
         entry_lon.delete(0, tk.END)
         _refresh()
-        messagebox.showinfo("✔  Aeroport afegit", f"L'aeroport {icao} s'ha afegit correctament.\nTotal aeroports: {len(airports)}")
+        messagebox.showinfo("✔  Aeroport afegit",
+                            f"L'aeroport {icao} s'ha afegit.\nTotal: {len(airports)}")
+
 
 def remove_airport():
     icao = entry_icao.get().upper()
@@ -285,9 +317,11 @@ def remove_airport():
         status.set(f"✔  Aeroport {icao} eliminat", ACCENT_GRN)
         entry_icao.delete(0, tk.END)
         _refresh()
-        messagebox.showinfo("✔  Aeroport eliminat", f"L'aeroport {icao} s'ha eliminat correctament.")
+        messagebox.showinfo("✔  Aeroport eliminat",
+                            f"L'aeroport {icao} s'ha eliminat.")
     else:
         messagebox.showerror("Error", f"No s'ha trobat {icao}")
+
 
 def load_airports_file():
     fn = filedialog.askopenfilename(title="Selecciona fitxer d'aeroports")
@@ -301,9 +335,11 @@ def load_airports_file():
             i += 1
         status.set(f"✔  {len(airports)} aeroports carregats", ACCENT_GRN)
         _refresh()
-        messagebox.showinfo("✔  Aeroports carregats", f"S'han carregat {len(airports)} aeroports correctament.")
+        messagebox.showinfo("✔  Aeroports carregats",
+                            f"S'han carregat {len(airports)} aeroports.")
     except Exception as e:
         messagebox.showerror("Error", str(e))
+
 
 def save_schengen():
     if not airports:
@@ -314,19 +350,23 @@ def save_schengen():
         messagebox.showwarning("Avís", "No hi ha aeroports Schengen")
     else:
         status.set("✔  Aeroports Schengen guardats", ACCENT_GRN)
-        messagebox.showinfo("✔  Fitxer guardat", "Els aeroports Schengen s'han guardat correctament.")
+        messagebox.showinfo("✔  Fitxer guardat",
+                            "Els aeroports Schengen s'han guardat.")
+
 
 def plot_airports_btn():
     if not airports:
         messagebox.showerror("Error", "No hi ha aeroports"); return
     PlotAirports(airports)
 
+
 def map_airports_btn():
     if not airports:
         messagebox.showerror("Error", "No hi ha aeroports"); return
     MapAirports(airports)
     status.set("✔  Fitxer KML generat", ACCENT_GRN)
-    messagebox.showinfo("✔  KML generat", "El fitxer KML dels aeroports s'ha generat correctament.")
+    messagebox.showinfo("✔  KML generat", "El fitxer KML dels aeroports s'ha generat.")
+
 
 # --- Versió 2 ---
 def load_arrivals():
@@ -337,9 +377,11 @@ def load_arrivals():
         aircrafts = LoadArrivals(fn)
         status.set(f"✔  {len(aircrafts)} vols carregats", ACCENT_GRN)
         _refresh()
-        messagebox.showinfo("✔  Vols carregats", f"S'han carregat {len(aircrafts)} vols correctament.")
+        messagebox.showinfo("✔  Vols carregats",
+                            f"S'han carregat {len(aircrafts)} vols.")
     except Exception as e:
         messagebox.showerror("Error", str(e))
+
 
 def save_flights_btn():
     if not aircrafts:
@@ -348,31 +390,36 @@ def save_flights_btn():
     if not fn: return
     if SaveFlights(aircrafts, fn) == 0:
         status.set("✔  Vols guardats", ACCENT_GRN)
-        messagebox.showinfo("✔  Vols guardats", "Els vols s'han guardat correctament.")
+        messagebox.showinfo("✔  Vols guardats", "Els vols s'han guardat.")
     else:
         messagebox.showerror("Error", "No s'ha pogut guardar")
+
 
 def plot_arrivals_btn():
     if not aircrafts:
         messagebox.showerror("Error", "No hi ha vols"); return
     PlotArrivals(aircrafts)
 
+
 def plot_airlines_btn():
     if not aircrafts:
         messagebox.showerror("Error", "No hi ha vols"); return
     PlotAirlines(aircrafts)
+
 
 def plot_type_btn():
     if not aircrafts:
         messagebox.showerror("Error", "No hi ha vols"); return
     PlotFlightsType(aircrafts)
 
+
 def map_flights_btn():
     if not aircrafts:
         messagebox.showerror("Error", "No hi ha vols"); return
     MapFlights(aircrafts)
     status.set("✔  Trajectòries KML generades", ACCENT_GRN)
-    messagebox.showinfo("✔  KML generat", "Les trajectòries KML s'han generat correctament.")
+    messagebox.showinfo("✔  KML generat", "Les trajectòries KML s'han generat.")
+
 
 def map_long_btn():
     if not aircrafts:
@@ -382,7 +429,9 @@ def map_long_btn():
         messagebox.showinfo("Avís", "No hi ha vols de més de 2000 km"); return
     MapFlights(long)
     status.set(f"✔  {len(long)} vols llarga distància", ACCENT_GRN)
-    messagebox.showinfo("✔  KML generat", f"S'han generat les trajectòries de {len(long)} vols de llarga distància.")
+    messagebox.showinfo("✔  KML generat",
+                        f"Trajectòries de {len(long)} vols de llarga distància.")
+
 
 # --- Versió 3 ---
 def load_lebl():
@@ -393,9 +442,11 @@ def load_lebl():
     if bcn_airport:
         status.set("✔  Estructura LEBL carregada", ACCENT_PRP)
         _refresh()
-        messagebox.showinfo("✔  LEBL carregat", "L'estructura de l'aeroport LEBL s'ha carregat correctament.")
+        messagebox.showinfo("✔  LEBL carregat",
+                            "L'estructura de LEBL s'ha carregat.")
     else:
         messagebox.showerror("Error", "No s'ha pogut carregar LEBL.txt")
+
 
 def assign_gates():
     if not bcn_airport:
@@ -413,7 +464,178 @@ def assign_gates():
         messagebox.showwarning("Avís", f"{errors} vols no han pogut obtenir porta")
     else:
         status.set(f"✔  Totes les portes assignades ({len(aircrafts)} vols)", ACCENT_GRN)
-        messagebox.showinfo("✔  Portes assignades", f"Totes les portes s'han assignat correctament.\nTotal vols: {len(aircrafts)}")
+        messagebox.showinfo("✔  Portes assignades",
+                            f"Totes les portes s'han assignat.\nTotal: {len(aircrafts)}")
+
+
+# --- Versió 4 ---
+
+def load_departures_btn():
+    """Carrega el fitxer de sortides"""
+    fn = filedialog.askopenfilename(title="Selecciona fitxer de sortides")
+    if not fn: return
+    try:
+        global departures
+        res_sortides = LoadDepartures(fn)
+        # LoadDepartures pot retornar (llista, -1) si hi ha error, o sols llista
+        if isinstance(res_sortides, tuple):
+            departures, codi_error = res_sortides
+            if codi_error == -1:
+                messagebox.showerror("Error", "No s'ha pogut carregar el fitxer")
+                return
+        else:
+            departures = res_sortides
+
+        status.set(f"✔  {len(departures)} sortides carregades", ACCENT_GRN)
+        _refresh()
+        messagebox.showinfo("✔  Sortides carregades",
+                            f"S'han carregat {len(departures)} sortides.")
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+
+
+def merge_movements_btn():
+    """Fusiona arribades i sortides"""
+    global aircrafts
+    if not aircrafts:
+        messagebox.showerror("Error", "Primer carrega les arribades"); return
+    if not departures:
+        messagebox.showerror("Error", "Primer carrega les sortides"); return
+
+    lista_moviments = MergeMovements(aircrafts, departures)
+    if isinstance(lista_moviments, tuple):
+        messagebox.showerror("Error", "No s'han pogut fusionar els moviments"); return
+
+    aircrafts = lista_moviments
+    amb_sortida = sum(1 for ac in aircrafts if ac.departure_time is not None)
+    nocturs = sum(1 for ac in aircrafts if ac.origin is None and ac.time is None)
+    status.set(f"✔  {len(aircrafts)} moviments fusionats "
+               f"({amb_sortida} amb sortida, {nocturs} nocturns)", ACCENT_GRN)
+    _refresh()
+    messagebox.showinfo("✔  Moviments fusionats",
+                        f"Total moviments: {len(aircrafts)}\n"
+                        f"Amb sortida assignada: {amb_sortida}\n"
+                        f"Avions nocturns: {nocturs}")
+
+
+def assign_night_gates_btn():
+    """Assigna portes als avions nocturns"""
+    if not bcn_airport:
+        messagebox.showerror("Error", "Primer carrega l'estructura LEBL"); return
+    if not aircrafts:
+        messagebox.showerror("Error", "No hi ha moviments carregats"); return
+
+    nocturs = NightAircraft(aircrafts)
+    if isinstance(nocturs, tuple) or not nocturs:
+        messagebox.showinfo("Avís", "No hi ha avions nocturns a la llista"); return
+
+    errors = AssignNightGates(bcn_airport, nocturs)
+    ok     = len(nocturs) - (errors if errors > 0 else 0)
+    status.set(f"✔  Avions nocturns assignats: {ok}/{len(nocturs)}", ACCENT_GRN)
+    messagebox.showinfo("✔  Avions nocturns",
+                        f"Avions nocturns: {len(nocturs)}\n"
+                        f"Assignats correctament: {ok}\n"
+                        f"Errors: {errors if errors > 0 else 0}")
+
+
+def assign_gates_at_time_btn():
+    """Obre una finestra per assignar portes en una franja horària específica"""
+    if not bcn_airport:
+        messagebox.showerror("Error", "Primer carrega l'estructura LEBL"); return
+    if not aircrafts:
+        messagebox.showerror("Error", "No hi ha moviments carregats"); return
+
+    # Finestra per seleccionar hora
+    win = _popup_window("Assignar Portes per Franja", ACCENT_RED, w=360, h=200)
+    tk.Frame(win, bg=BG_DARK, height=10).pack()
+
+    lbl_frame = tk.Frame(win, bg=BG_DARK)
+    lbl_frame.pack(pady=8)
+    tk.Label(lbl_frame, text="Selecciona la franja horària (hh:00):",
+             bg=BG_DARK, fg=TEXT_MAIN, font=("Consolas", 9)).pack()
+
+    hours = [f"{h:02d}:00" for h in range(24)]
+    combo_var = tk.StringVar(value="08:00")
+    combo = ttk.Combobox(win, textvariable=combo_var, values=hours,
+                         state="readonly", font=("Consolas", 10), width=10)
+    combo.pack(pady=6)
+
+    def do_assign():
+        selected_time = combo_var.get()
+        errors_porta = AssignGatesAtTime(bcn_airport, aircrafts, selected_time)
+        status.set(
+            f"✔  Franja {selected_time}: {errors_porta} sense porta", ACCENT_GRN)
+        messagebox.showinfo("✔  Assignació per franja",
+                            f"Franja: {selected_time}\n"
+                            f"Vols sense porta: {errors_porta}")
+        win.destroy()
+
+    HoverButton(win, text="✔  Assignar", command=do_assign,
+                color=ACCENT_RED).pack(pady=8, padx=30, fill="x")
+
+
+def plot_day_occupancy_btn():
+    """Gràfic d'ocupació de portes al llarg del dia"""
+    if not bcn_airport:
+        messagebox.showerror("Error", "Primer carrega l'estructura LEBL"); return
+    if not aircrafts:
+        messagebox.showerror("Error", "No hi ha moviments carregats"); return
+
+    # Recarreguem una còpia neta de bcn perquè PlotDayOccupancy
+    # simula el dia des del principi
+    fn = filedialog.askopenfilename(
+        title="Selecciona LEBL.txt per simular el dia",
+        filetypes=[("Text files", "*.txt")])
+    if not fn: return
+
+    bcn_sim = LoadAirportStructure(fn)
+    if not bcn_sim:
+        messagebox.showerror("Error", "No s'ha pogut carregar LEBL.txt"); return
+
+    # Assignem primer els avions nocturns a la còpia neta
+    nocturs = NightAircraft(aircrafts)
+    if isinstance(nocturs, list) and nocturs:
+        AssignNightGates(bcn_sim, nocturs)
+
+    status.set("⏳  Generant gràfic d'ocupació diària...", ACCENT_ORG)
+    root.update()
+    PlotDayOccupancy(bcn_sim, aircrafts)
+    status.set("✔  Gràfic d'ocupació diària generat", ACCENT_GRN)
+
+
+def show_movements_list_btn():
+    """Mostra la llista de moviments fusionats"""
+    show_movements_popup()
+
+
+def free_gate_btn():
+    """Allibera la porta d'un avió per ID"""
+    if not bcn_airport:
+        messagebox.showerror("Error", "No hi ha estructura LEBL carregada"); return
+
+    # Petita finestra per introduir l'ID
+    win = _popup_window("Alliberar Porta", ACCENT_RED, w=340, h=180)
+    tk.Frame(win, bg=BG_DARK, height=10).pack()
+
+    entry_id = StyledEntry(win, "ID DE L'AVIÓ")
+    entry_id.pack(padx=20, pady=6, fill="x")
+
+    def do_free():
+        aircraft_id = entry_id.get().strip()
+        if not aircraft_id:
+            messagebox.showerror("Error", "Introdueix un ID vàlid"); return
+        res = FreeGate(bcn_airport, aircraft_id)
+        if res == 0:
+            status.set(f"✔  Porta de {aircraft_id} alliberada", ACCENT_GRN)
+            messagebox.showinfo("✔  Porta alliberada",
+                                f"La porta de l'avió {aircraft_id} s'ha alliberat.")
+        else:
+            messagebox.showerror("Error",
+                                 f"No s'ha trobat l'avió {aircraft_id} en cap porta")
+        win.destroy()
+
+    HoverButton(win, text="🔓  Alliberar porta", command=do_free,
+                color=ACCENT_RED).pack(pady=8, padx=30, fill="x")
 
 
 # =====================================================
@@ -421,8 +643,8 @@ def assign_gates():
 # =====================================================
 
 root = tk.Tk()
-root.title("Airport Management  ·  LEBL")
-root.geometry("480x840")
+root.title("Airport Management  ·  LEBL  ·  v4")
+root.geometry("500x980")
 root.minsize(480, 600)
 root.configure(bg=BG_DARK)
 root.resizable(True, True)
@@ -430,7 +652,7 @@ root.resizable(True, True)
 # ----------- CAPÇALERA -----------
 hdr = tk.Frame(root, bg=BG_PANEL)
 hdr.pack(fill="x")
-tk.Frame(hdr, bg=ACCENT_BLUE, height=4).pack(fill="x")      # Franja de color
+tk.Frame(hdr, bg=ACCENT_BLUE, height=4).pack(fill="x")
 
 hdr_inner = tk.Frame(hdr, bg=BG_PANEL, pady=12, padx=18)
 hdr_inner.pack(fill="x")
@@ -440,7 +662,7 @@ block = tk.Frame(hdr_inner, bg=BG_PANEL)
 block.pack(side="left")
 tk.Label(block, text="Airport Management", bg=BG_PANEL, fg=TEXT_MAIN,
          font=("Consolas", 14, "bold"), anchor="w").pack(anchor="w")
-tk.Label(block, text="Informatica 1  ·  2025-26 Q2  ·  Barcelona LEBL",
+tk.Label(block, text="Informàtica 1  ·  2025-26 Q2  ·  Barcelona LEBL  ·  v4",
          bg=BG_PANEL, fg=TEXT_SUB, font=("Consolas", 8), anchor="w").pack(anchor="w")
 
 tk.Frame(root, bg=BORDER, height=1).pack(fill="x")
@@ -461,7 +683,7 @@ content.bind("<Configure>",
 canvas_scroll.bind("<Configure>",
     lambda e: canvas_scroll.itemconfig(cwin, width=e.width))
 canvas_scroll.bind_all("<MouseWheel>",
-    lambda e: canvas_scroll.yview_scroll(int(-1*(e.delta/120)), "units"))
+    lambda e: canvas_scroll.yview_scroll(int(-1 * (e.delta / 120)), "units"))
 
 tk.Frame(content, bg=BG_DARK, height=12).pack()
 
@@ -472,7 +694,6 @@ tk.Frame(content, bg=BG_DARK, height=12).pack()
 sec1 = Section(content, "Gestió d'Aeroports", ACCENT_BLUE, icon="🌍")
 sec1.pack(fill="x", padx=16, pady=(0, 10))
 
-# Camps d'entrada en 3 columnes
 inputs = tk.Frame(sec1.body, bg=BG_PANEL)
 inputs.pack(fill="x", pady=(0, 10))
 inputs.columnconfigure(0, weight=1)
@@ -481,12 +702,11 @@ inputs.columnconfigure(2, weight=1)
 
 entry_icao = StyledEntry(inputs, "CODI ICAO")
 entry_icao.grid(row=0, column=0, padx=(0, 5), sticky="ew")
-entry_lat = StyledEntry(inputs, "LATITUD")
-entry_lat.grid(row=0, column=1, padx=5, sticky="ew")
-entry_lon = StyledEntry(inputs, "LONGITUD")
-entry_lon.grid(row=0, column=2, padx=(5, 0), sticky="ew")
+entry_lat  = StyledEntry(inputs, "LATITUD")
+entry_lat.grid(row=0,  column=1, padx=5,      sticky="ew")
+entry_lon  = StyledEntry(inputs, "LONGITUD")
+entry_lon.grid(row=0,  column=2, padx=(5, 0), sticky="ew")
 
-# Graella de botons 2 columnes
 g1 = tk.Frame(sec1.body, bg=BG_PANEL)
 g1.pack(fill="x")
 g1.columnconfigure(0, weight=1)
@@ -551,6 +771,31 @@ for txt, cmd, col, r, c in defs_v3:
     HoverButton(g3, text=txt, command=cmd, color=col).grid(
         row=r, column=c, padx=3, pady=3, sticky="ew")
 
+
+# =========================================================
+#  SECCIÓ 4 — SORTIDES I ASSIGNACIÓ DINÀMICA  (V4)
+# =========================================================
+sec4 = Section(content, "Sortides i Assignació Dinàmica", ACCENT_RED, icon="🛫")
+sec4.pack(fill="x", padx=16, pady=(0, 10))
+
+g4 = tk.Frame(sec4.body, bg=BG_PANEL)
+g4.pack(fill="x")
+g4.columnconfigure(0, weight=1)
+g4.columnconfigure(1, weight=1)
+
+defs_v4 = [
+    ("📂  Carregar sortides",             load_departures_btn,      ACCENT_RED, 0, 0),
+    ("🔀  Fusionar arribades+sortides",   merge_movements_btn,      ACCENT_RED, 0, 1),
+    ("📋  Veure tots els moviments",      show_movements_list_btn,  ACCENT_RED, 1, 0),
+    ("🌙  Assignar avions nocturns",      assign_night_gates_btn,   ACCENT_RED, 1, 1),
+    ("⏱  Assignar portes per hora",      assign_gates_at_time_btn, ACCENT_RED, 2, 0),
+    ("📊  Ocupació al llarg del dia",     plot_day_occupancy_btn,   ACCENT_RED, 2, 1),
+    ("🔓  Alliberar porta per ID",        free_gate_btn,            ACCENT_RED, 3, 0),
+]
+for txt, cmd, col, r, c in defs_v4:
+    HoverButton(g4, text=txt, command=cmd, color=col).grid(
+        row=r, column=c, padx=3, pady=3, sticky="ew")
+
 tk.Frame(content, bg=BG_DARK, height=10).pack()
 
 
@@ -562,5 +807,3 @@ status.set("Llest — carrega un fitxer per començar")
 _refresh()
 
 root.mainloop()
-
-#creacio v.4
