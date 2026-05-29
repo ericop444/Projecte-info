@@ -563,4 +563,4 @@ _refresh()
 
 root.mainloop()
 
-#creacio v4
+#creacio v.4
