@@ -108,8 +108,8 @@ def MergeMovements(arrivals, departures):
     i = 0
     while i < len(arrivals):
         a = arrivals[i]
-        merged.append(Aircraft(a.id, a.airline, a.origin, a.time,
-                               a.destination, a.departure_time))
+        lista_moviments.append(Aircraft(a.id, a.airline, a.origin, a.time,
+                                        a.destination, a.departure_time))
         i += 1
 
     # Afegim les sortides: si existeix una arribada amb el mateix id i

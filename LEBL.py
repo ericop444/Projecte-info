@@ -194,13 +194,49 @@ def SearchTerminal(bcn, name):
 
 
 # -------------------------------------------------------
+# FUNCIÓ EXTRA
+# Comprova si un avió ja té una porta assignada.
+# Aquesta funció serveix per evitar que, si l'usuari prem
+# dues vegades el botó d'assignar portes, el mateix avió
+# pugui ocupar dues portes diferents.
+# Retorna True si l'avió ja ocupa alguna porta, i False si no.
+# -------------------------------------------------------
+
+def AircraftHasGate(bcn, aircraft_id):
+    t = 0
+    while t < len(bcn.terminals):
+        terminal = bcn.terminals[t]
+
+        a = 0
+        while a < len(terminal.boarding_areas):
+            area = terminal.boarding_areas[a]
+
+            g = 0
+            while g < len(area.gates):
+                porta = area.gates[g]
+
+                if porta.occupied and porta.aircraft_id == aircraft_id:
+                    return True
+
+                g += 1
+            a += 1
+        t += 1
+
+    return False
+
+# -------------------------------------------------------
 # Assigna una porta a un avió
 # Retorna -1 si no es troba aerolínia, -2 si no hi ha portes lliures
 # -------------------------------------------------------
+
 def AssignGate(bcn, aircraft):
-    # Necessitem aerolínia i origen per assignar porta
+    # Necessitem aerolínia per assignar porta
     if aircraft.airline is None:
         return -1
+
+    # Si l'avió ja té una porta, no li assignem una altra
+    if AircraftHasGate(bcn, aircraft.id):
+        return 0
 
     target_terminal_name = SearchTerminal(bcn, aircraft.airline)
 
