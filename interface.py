@@ -637,6 +637,73 @@ def free_gate_btn():
     HoverButton(win, text="🔓  Alliberar porta", command=do_free,
                 color=ACCENT_RED).pack(pady=8, padx=30, fill="x")
 
+#===========================================
+#Funció extra
+#=============================================
+def search_flight_btn():
+    """Cerca un vol per ID i mostra tota la seva informació"""
+    win = _popup_window("Cerca de Vol per ID", ACCENT_BLUE, w=420, h=300)
+    tk.Frame(win, bg=BG_DARK, height=10).pack()
+
+    entry_id = StyledEntry(win, "ID DE L'AVIÓ")
+    entry_id.pack(padx=20, pady=6, fill="x")
+
+    result_frame = tk.Frame(win, bg=BG_CARD,
+                            highlightbackground=BORDER, highlightthickness=1)
+    result_frame.pack(fill="both", expand=True, padx=20, pady=6)
+
+    result_lb = tk.Listbox(
+        result_frame, bg=BG_CARD, fg=TEXT_MAIN,
+        font=("Consolas", 9), bd=0, relief="flat",
+        highlightthickness=0
+    )
+    result_lb.pack(fill="both", expand=True, padx=6, pady=6)
+
+    def do_search():
+        result_lb.delete(0, tk.END)
+        aircraft_id = entry_id.get().strip().upper()
+        if not aircraft_id:
+            result_lb.insert(tk.END, "  Introdueix un ID vàlid.")
+            return
+
+        # Cerquem a la llista de moviments
+        trobat = None
+        i = 0
+        while i < len(aircrafts):
+            if aircrafts[i].id == aircraft_id:
+                trobat = aircrafts[i]
+                break
+            i += 1
+
+        if trobat is None:
+            result_lb.insert(tk.END, f"  ✘  Vol '{aircraft_id}' no trobat.")
+            return
+
+        # Informació del vol
+        result_lb.insert(tk.END, f"  ID:          {trobat.id}")
+        result_lb.insert(tk.END, f"  Companyia:   {trobat.airline or '—'}")
+        result_lb.insert(tk.END, f"  Origen:      {trobat.origin or '—'}")
+        result_lb.insert(tk.END, f"  Arribada:    {trobat.time or '—'}")
+        result_lb.insert(tk.END, f"  Destinació:  {trobat.destination or '—'}")
+        result_lb.insert(tk.END, f"  Sortida:     {trobat.departure_time or '—'}")
+
+        # Porta assignada (si LEBL carregat)
+        if bcn_airport:
+            from LEBL import FindGateByAircraft
+            t_name, a_name, g_name = FindGateByAircraft(bcn_airport, aircraft_id)
+            if g_name:
+                result_lb.insert(tk.END, f"  Terminal:    {t_name}")
+                result_lb.insert(tk.END, f"  Àrea:        {a_name}")
+                result_lb.insert(tk.END, f"  Porta:       {g_name}")
+            else:
+                result_lb.insert(tk.END, f"  Porta:       sense assignar")
+        else:
+            result_lb.insert(tk.END, f"  Porta:       (LEBL no carregat)")
+
+        status.set(f"✔  Vol {aircraft_id} trobat", ACCENT_GRN)
+
+    HoverButton(win, text="🔍  Cercar vol", command=do_search,
+                color=ACCENT_BLUE).pack(pady=4, padx=20, fill="x")
 
 # =====================================================
 #  CONSTRUCCIÓ DE LA FINESTRA PRINCIPAL
@@ -791,6 +858,7 @@ defs_v4 = [
     ("⏱  Assignar portes per hora",      assign_gates_at_time_btn, ACCENT_RED, 2, 0),
     ("📊  Ocupació al llarg del dia",     plot_day_occupancy_btn,   ACCENT_RED, 2, 1),
     ("🔓  Alliberar porta per ID",        free_gate_btn,            ACCENT_RED, 3, 0),
+    ("🔍  Cercar vol per ID",             search_flight_btn,        ACCENT_BLUE, 3, 1),
 ]
 for txt, cmd, col, r, c in defs_v4:
     HoverButton(g4, text=txt, command=cmd, color=col).grid(

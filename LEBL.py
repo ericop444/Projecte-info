@@ -305,6 +305,27 @@ def FreeGate(bcn, aircraft_id):
 
     return -1   # Avió no trobat en cap porta
 
+# -------------------------------------------------------
+#FUNCIO EXTRA
+# Cerca la porta assignada a un avió per ID (v4)
+# Retorna el nom de la porta o None si no té porta
+# -------------------------------------------------------
+def FindGateByAircraft(bcn, aircraft_id):
+    t = 0
+    while t < len(bcn.terminals):
+        terminal = bcn.terminals[t]
+        a = 0
+        while a < len(terminal.boarding_areas):
+            area = terminal.boarding_areas[a]
+            g = 0
+            while g < len(area.gates):
+                porta = area.gates[g]
+                if porta.occupied and porta.aircraft_id == aircraft_id:
+                    return terminal.name, area.name, porta.name
+                g += 1
+            a += 1
+        t += 1
+    return None, None, None
 
 # -------------------------------------------------------
 # Assigna portes als avions nocturns (v4)
@@ -366,7 +387,7 @@ def AssignGatesAtTime(bcn, aircrafts, time):
         print("Error: format d'hora incorrecte:", time)
         return -1
 
-    # 1. Alliberem les portes dels avions que ja han sortit abans d'ara
+    # 1. Alliberem les portes dels avions que ja han sortit abans d'hora
     i = 0
     while i < len(aircrafts):
         ac = aircrafts[i]
